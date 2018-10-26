@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 扩展预算符 rest运算符
+			 1、函数默认参数
+			 2、函数的参数默认已经定义，不能再次声明
+			 3、箭头函数
+ 			 	() = > rutrn ...
+			 	(a,b) =>{}
+				 	1). this 问题 ，定义函数所在的对象，不再是运行时所在的对象（调用函数的对象）
+				 	2).箭头函数里面没有 arguments
+				 	3).箭头函数不能当构造函数
+					4).ES2017 函数参数最后得逗号可以有
+			 * */
+			/*
+			 	函数默认参数
+			 * */
+			function show(a='moren',b='moren'){
+			//旧写法
+			/*function show(a,b){
+				a=a || 'aaaa';
+				b=b || 'bbbb';*/
+				console.log(a,b)//  bbb
+			}
+			show('','bbb');
+			function show1({x='xxxx',y='yyyy'}={}){
+				console.log(x,y) //  xxxx yyyy
+			}
+			show1()
+			/*
+			 * 旧写法 
+			 function show1(option){
+				option=option || {}
+				console.log(option)
+			}
+			show1()*/
+			/*
+			 	函数的参数默认已经定义，不能再次声明
+			 * */
+			//错误
+			/*function show2(a=12){
+				let a=13;
+				console.log(a)
+			}
+			show2()*/
+			/*
+			 扩展预算符 rest运算符 ... :扩展、重置 适用于数组
+			 * */
+			//扩展功能
+			let arr=['apple','banana','orange']
+			console.log(arr); //  ["apple", "banana", "orange"]
+			console.log(...arr); //  apple banana orange
+			//let str1=(...arr); 错误
+			//console.log(str1)
+			//重置功能
+//			function show3(...a){
+//				return a.sort()
+//			}
+			function show3(){
+				return Array.prototype.slice.call(arguments).sort()
+			}
+			console.log(show3(1,6,3,4,9,0))
+			function show4(a,b,c){
+				console.log(a,b,c) //2 1 7
+			}
+			show4(...[2,1,7]);
+			//剩余函数
+			function show5(a,b,...c){ 
+				console.log(a,b) //7 3
+				console.log(c) //[5, 6, 8, 9, 9]
+			}
+			show5(7,3,5,6,8,9,9);
+			//复制数组  ... 或者 from
+			var arr2=[2,7,4,9];
+			//var arr3=[...arr2];
+			var arr3=Array.from(arr2);
+			console.log(arr2,arr3);//  (4) [2, 7, 4, 9] (4) [2, 7, 4, 9]
+			/*
+			 	箭头函数
+			 * */
+			var show6=() => 5;
+			console.log(show6()); //5
+			var show7= (a,b) =>{
+				console.log(a,b); //2 6
+				return a+b
+			}
+			console.log(show7(2,6)) //8
+			var name=10; //var 定义的 变量为window变量，let conset 定义的变量 window 引用不了
+			// 问题一
+			var json1={
+				name:1,
+				show:function(){
+//					setTimeout(function(){
+//						alert(this.name) // 10
+//					},2000)
+//					setTimeout(()=>{
+//						alert(this.name); //1
+//					},2000)
+				}
+			}
+			json1.show();
+			//问题二
+			var show8=(...args) =>{
+				console.log(args) //[4, 2, 3, 6, 8, 5]
+				//console.log(arguments); //报错
+			}
+			show8(4,2,3,6,8,5)
+			//问题三
+			function show9(){
+				this.name= 4;
+			}
+			var show10=new show9();
+			console.log(show10.name);
+//			var show11=()=>{
+//				this.name= 4;
+//				console.log(this.name)
+//			}
+//			var show12=new show11(); //show11 is not a constructor
+//			console.log(show10.name);
+			//问题四
+			var show12=(a,b,c,)=>{
+				console.log(a,b,c) //1 2 3
+			}
+			show12(1,2,3,);
+		</script>
+		
+	</head>
+	<body>
+	</body>
+</html>

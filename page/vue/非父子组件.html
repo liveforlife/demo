@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>my</title>
+	<script src="component\vue\dist\vue.js"></script>
+	<script>
+		var vm=null;
+		var Busi=new Vue(); // 公交bus 用于挂载 组件需要传参的事件
+		var comA={
+			template:'#a',
+			data(){
+				return {
+					content:'aaaa1111'
+				}
+			},
+			methods:{
+				send(){
+					Busi.$emit('data-a',this.content)
+				}
+			}
+		}
+		var comB={
+			template:'#b',
+			data(){
+				return {
+					content:"bbbb2222"
+				}
+			},
+			methods:{
+				send(){
+					Busi.$emit('data-b',this.content)
+				}
+			}
+		}
+		var comC={
+			template:'#c',
+			data(){
+				return{
+					a:'',
+					b:''
+				}
+			},
+			mounted(){ //生命周期 挂载结束 
+				var that=this; 
+				Busi.$on('data-a',function(data){ // 可以使用箭头函数es6，可以直接使用that 不用再转换
+					//区分 this 指向的对象
+					that.a=data 
+				})
+				Busi.$on('data-b',function(data){
+					that.b=data
+				})
+			}
+		}
+		window.onload=function(){
+			vm=new Vue({
+				el:"#my",
+				data:{
+					name:'ccy',
+					flag:'my-address'
+				},
+				components:{
+					'my-a':comA,
+					'my-b':comB,
+					'c':comC
+				}
+			})	
+		}	
+	</script>
+  </head>
+  <template id="a">
+	<div>
+		<h2>aaaa</h2>
+		<div>{{content}}</div>
+		<button @click="send">发送</button>
+	</div>
+  </template>
+  <template id="b">
+	<div>
+		<h2>bbbb</h2>
+		<div>{{content}}</div>
+		<button @click="send">发送</button>
+	</div>
+  </template>
+  <template id="c">
+	<div>
+		<h2>cccc</h2>
+		<div>{{a}}{{b}}</div>
+	</div>
+  </template>
+  <body>
+    <div id="my">
+		<my-a></my-a>
+		<my-b></my-b>
+		<c></c>
+	</div>
+  </body>
+</html>

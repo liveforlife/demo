@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="bower_components/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="myVue">
+			{{msg}}
+			<div>
+				<span ref="hello">{{hello}}</span>
+				<span ref="msg">{{msg}}</span>
+			</div>
+			<div>
+				<span>{{nextTick()}}</span>
+			</div>
+			<div>
+				<span @click="addData">addData</span>
+				<span @click="deleteData">deleteData</span>
+				<span @click="updata">updata</span>
+				<p> {{form.sex}}</p>
+			</div>
+		</div>
+		<script>
+			/*
+			 	$data $mount $nextTick $set $delete $el $options $refs
+			 * */
+			window.onload=function(){
+				var vm=new Vue({
+					
+					data:{
+						msg:'massage',
+						a:10,
+						hello:'hello world',
+						form:{
+							age:20,
+							name:'aaa'
+						}
+					},
+					msg:'aaaaa',
+					methods:{
+						//$nextTick 延迟执行
+						nextTick(){
+							this.$nextTick(function(){
+								console.log(this.$refs.msg);
+							})
+						},
+						// $set $detele 给对象添加属性
+						addData(){
+							this.$set(this.form,"sex",'man')
+						},
+						deleteData(){
+							this.$delete(this.form,"sex")
+						},
+						updata(){
+							this.form.sex="female"
+							
+						},
+					}
+				})
+				// 手动挂载
+				vm.$mount('#myVue')
+				//获取DOM对象
+				vm.$el.style.backgroundColor='blue'
+				vm.$el.style.color="white"
+				//获取对应data中的数据和自定义中的数据
+				console.log(vm.$data.msg);
+				console.log(vm.msg);
+				console.log(vm.$options.msg);
+				//获取对应dom
+				vm.$refs.hello.style.backgroundColor="green";
+				vm.$refs.msg.style.backgroundColor="orange";
+				
+			}
+		</script>
+	</body>
+</html>

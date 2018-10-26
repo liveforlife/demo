@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 	解决异步回调函数
+			 	promise 对象 方法
+			 	1、Promise.resolve() 将现有东西 转化为Promise对象，resolve状态，成功状态
+			 		等价于 new Promise(resolve =>{
+			 			resolve('aa')
+			 		})
+			 	2、Promise.reject() 将现有东西转化为Promise对象，reject状态，失败状态
+			 		等价于 new Promise((resolve,reject) =>{
+			 			reject('bbb')
+			 		})
+			 	3、Promise.all([p1,p2,p3]) 将Promise打包，扔到一个数组里，打包完还是一个Promise
+			 		必须确保所有Promise对象，都是resolve状态，成功状态
+			 	4、Promise.race([p1,p2,p3])只要有一个成功 就返回
+			 * */
+			//基本用法
+			var a=9;
+			let prom=new Promise(function(resolve,reject){
+				if(a > 10){
+					resolve('成功')
+				}else{
+					reject('失败')
+				}
+			})
+//			prom.then(res=>{
+//				console.log(res)
+//			},err=>{
+//				console.log(err)
+//			})
+			prom.then(res=>{
+				console.log(res)
+			}).catch(err=>{ //捕获失败
+				console.log(err)
+			})
+			prom.catch(err=>{ //捕获失败
+				console.log(err)
+			})
+			//通常用法
+			var b=12
+			new Promise(function(resolve,reject){
+				if(b <10){
+					resolve('< 10')
+				}else{
+					reject('> 10')
+				}
+			}).then(res=>{
+				console.log(res)
+			}).catch(err=>{
+				console.log(err)
+			})
+			//Promise.resolve
+			let aaa=Promise.resolve('aaa');
+			aaa.then(res=>{
+				console.log(res)
+			})
+			let aa= new Promise(resolve =>{
+			 			resolve('aa')
+			 		})
+			aa.then(res=>{
+				console.log(res)
+			})
+			let bb=new Promise((resolve,reject) =>{ // (resolve,reject)正确， reject 错误
+			 			reject('bbb')
+			 		})
+			bb.catch(err=>{
+				console.log(err)
+			})
+			//Promise.all Promise.race
+			let p1=Promise.resolve('aaa');
+			let p2=Promise.resolve('bbb');
+			let p3=Promise.resolve('ccc');
+			Promise.all([p1,p2,p3]).then(res=>{
+				console.log(res); //["aaa", "bbb", "ccc"]
+			})
+			let p4=Promise.reject('errBBB');
+			Promise.all([p1,p4,p2]).then(
+				res=>{
+					console.log(res)
+				}
+			).catch(err=>{
+				console.log(err)//errBBB
+			})
+			Promise.race([p1,p4,p2]).then(
+				res=>{
+					console.log(res)//aaa
+				}
+			).catch(err=>{
+				console.log(err)
+			})
+			Promise.race([p1,p2]).then(
+				res=>{
+					console.log(res)//aaa
+				}
+			).catch(err=>{
+				console.log(err)
+			})
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" />
+		<button type="button" >查询</button>
+		<script>
+			var urlText=document.getElementsByTagName('input')[0];
+			var urlBut=document.getElementsByTagName('button')[0];
+			urlBut.onclick=function(){
+				var xhr=new XMLHttpRequest;
+				console.dir(xhr)
+				//open()
+				xhr.open('GET','http://localhost:3000/getMsg')
+				//send()
+				xhr.send("url="+urlText.value);
+				xhr.onreadystatechange=function(){
+					console.dir(xhr)
+				}
+			}
+		</script>
+	</body>
+</html>

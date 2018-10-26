@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		//字符串模板 ：支持随意换行  ; ·${}· 
+		/*
+		 新函数：
+		 	1、includes ES2016  返回是否包含查找的字符串 ：true false   对比 indexOf:返回索引位置 没找到为-1
+		 	2、startsWith 检测以什么开头
+		 	3、endsWith 检测以什么结尾 
+		 	4、repeat(num) 让字符串重复字符串 重复几次  例如： str.repeat(3) str  重复3次
+		 	ES2018 
+		 	5、padStart(整个字符串的长度，str)  填充字符串
+		 	6.padEnd
+		 * */
+		let arr=[
+			{title:'eeeee',num:30},
+			{title:'aaaa',num:30},
+			{title:'vvvv',num:30},
+		]
+		window.onload=function(){
+			var ul=document.querySelector('ul');
+			for(let i=0;i<arr.length;i++){
+				var oli=document.createElement('li');
+				//oli.innerHTML='<span>title'+arr[i].title+'</span>'+'<span>评论'+arr[i].num+'</span>';//旧写法
+				oli.innerHTML=`<span>title${arr[i].title}</span>
+								<span>评论${arr[i].num}</span>`; 
+								/*新写法*/
+				ul.appendChild(oli);
+			}
+			let  str='apple banna appe'
+			console.log(str.includes('appe'))
+			console.log(navigator.userAgent);
+			if(navigator.userAgent.includes('Chrome')){ // Chrome
+				console.log('Chrome')
+			}else{
+				console.log('不是chrome')
+			}
+			let str1='http://127.0.0.1:8020/demo/page/ES6/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A8%A1%E6%9D%BF.html?__hbt=1538979468358';
+			let str2='https://www.csdn.net/nav/web';
+			console.log(str1.startsWith('https'));
+			console.log('a'.repeat(4));
+			console.log('a'.padStart(4,'XXX'));
+		}
+	</script>
+	<body>
+		<ul>
+
+		</ul>
+	</body>
+</html>

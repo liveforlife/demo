@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+		/*
+		 数据结构：数组（队列、堆栈）json 二叉树
+		Set 类似数组 初始化时只能存储数组， add：数据或者json
+			 使用：
+			 	let set=new Set([]) 错误 ：Set({})
+			 方法：
+				1、add  往setArr里面添加一项 成功：add({})
+				2、delete  删除一项
+				3、has  判断setArr里面有没有此值
+				4、size：属性 个数
+				5、clear()  清空
+			循环 ：
+				for... of.... 默认：values
+					a). for(let item of setArr){  //默认是values()
+			            console.log(item);
+					        }
+					b). for(let item of setArr.keys()){console.log(item);}
+					c). for(let item of setArr.values()){}
+					d). for(let [k,v] of setArr.entries()){}
+					
+					e). setArr.forEach((value,index) =>{
+					            console.log(value, index);
+					        });
+			用法：
+				数组去重
+
+		WeakSet 类似Set  初始化时 什么都不能存。add:json 或者 数组
+			使用：
+				let wSet=new WeakSet()
+			方法：
+				add
+				delete
+				has
+			 * */
+			let arr1=['a','b','c','a'];
+			console.log(arr1) //(4) ["a", "b", "c", "a"]
+			console.log('----------------------')
+			let s1=new Set(arr1)
+			console.log(s1,typeof s1) // Set(3) {"a", "b", "c"} "object"  不能重复
+			s1.add('l')
+			console.log(s1) //Set(4) {"a", "b", "c", "l"}
+			s1.delete('a')
+			console.log(s1) //Set(3) {"b", "c", "l"}
+			console.log(s1.has('b')) //true
+			console.log(s1.has('a')) //true
+			console.log(s1.size) //3
+			for (let item of s1) {
+				console.log(item) // b  c l
+			}
+			s1.forEach((value,key)=>{
+				console.log(value,key)
+			})
+			s1.clear()
+			console.log(s1); //Set(0) {}
+			s1.add('a').add('m').add('l');
+			console.log(s1)
+			//数组去重
+			var arr2=[1,2,3,4,5,6,7,8,4,3,2,1,5,4,5]
+			var arr3=[...new Set(arr2)]
+			console.log(arr3)  //(8) [1, 2, 3, 4, 5, 6, 7, 8]
+			//set 使用 map filter
+			let s4=new Set(arr2)
+			let arr4=[...s4].filter(val =>{return val%2==0})
+			let s44=new Set(arr4)
+			console.log(s44) //Set(4) {2, 4, 6, 8}
+			var json1={
+				aa:'aa',
+				bb:'bb'
+			}
+			let wSet=new WeakSet();
+			wSet.add(arr4)
+			s1.add(json1)
+			console.log(wSet,s1);
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

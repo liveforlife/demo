@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    	<style>
+    		.slide_button{
+    			height: 30px;margin-top:5px ;width: 40px;border-radius: 20px;border: 1px solid #4186c2;
+    			margin-left: 5px;font-size: 12px;line-height: 30px;color: #fe2823;background: #FFF;
+    		}
+    	</style>
+	</head>
+	<body style="text-align: center;">
+		<div id="slideContainer" class="" style="width: 90%;border: 1px solid #aad8fc;border-radius: 1rem;height: 40px;margin-left: 5%;text-align: center;background-color: #fefefe;">
+			
+			<div class="slide_button" id="slideButton">
+				05:00
+			</div>
+			<div>拖动滑块,确认接单>></div>
+		</div>
+		<script>
+			var flag=false
+			document.getElementById('slideButton').onswipeDown=function(e){
+				flag=true;
+				console.log(flag)
+
+			}
+			document.getElementById('slideContainer').onswipeRight=function(e){
+				console.log(flag)
+				var event=e || window.event;
+				if(flag){
+					console.log('222')
+					document.getElementById('slideButton').style.marginLeft=event.clientX+'px';					
+				}
+			}
+			document.getElementById('slideButton').onswipeUp=function(e){
+				flag=false;
+								console.log(flag)
+
+			}
+		</script>
+	</body>
+</html>

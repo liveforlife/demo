@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+		/*
+		 * 	注解：bind 的方法运用：返回改变this的函数，
+		 * 	与 call、apply 不同；此方法 改变this 并 立即执行
+		 *  
+		 * 	重写 bind 方法
+		 * 
+		 * */
+		var value=3;
+		var obj={
+			value:2
+		}
+		function show(name,age){
+			console.log(this.value);
+			console.log(name+' '+age);
+		}
+		/*
+		 *	构造函数 
+		 * */
+		
+		Function.prototype.newBind=function(target){
+			target=target || window;
+			var self=this;
+			var args=[].slice.call(arguments,1);
+			var temp=function(){};
+			temp.prototype=self.prototype;
+			var F=function(){
+				var _arg=[].slice.call(arguments);
+				self.apply(this instanceof temp ?this : target,args.concat(_arg));
+			}
+			F.prototype=new temp();
+			return F;
+		}
+		
+		/*
+		 * 	bind()
+		 *	1、 传入对象
+		 * 	2、bind后 new 运行
+		 * 	3、传入null
+		 * */
+		var newShow=show.bind(obj,333);
+		newShow(22)
+		console.log('//////')
+		new newShow(222)
+		console.log('//////')
+		/*var newShow3=new newShow(4444);
+		newShow3();*/
+		console.log('//////')
+		var newShow2=show.newBind(null,333,9999);
+		newShow2(777,222,8888)
+	</script>
+	</body>
+</html>

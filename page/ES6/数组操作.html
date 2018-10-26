@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//数组循环
+			/*
+			ES5: forEach map filter some every reduce reduceRight
+				forEach：代替从常规for循环
+				map：做数据交互 映射 ；正常情况下，需要配合return ，返回一个新的数组；若没有return ，相当于forEach；注意：平时只要用map，一定要有return，
+					重新整理数据 如：[{title:'aaa'}] => [{t:'aaaa'}]  
+				filter:过滤，过滤一些不合格“元素”，如果回调函数返回true ，就留下来
+				some：类似查找，数组里面某一个符合要求，返回true
+				every：数组里面所有的元素都要符合条件，才返回true
+				
+				用法：
+					arr.forEach(function(val,index,arr){
+					
+					},this指向谁)
+			
+			*/
+			let flag=false;
+			let aaa= flag && '6666' 
+			//let aaa =flag || '66666'
+			console.log(aaa)
+			/*
+				reduce（从左往右） reduceRight（从右往左）:求和 ,阶乘
+				
+			*/
+			var arr1=[2,2,4];
+			let aaPow=arr1.reduce((prev,cur,index,arr1)=>{
+				return prev ** cur //ES2017 新增运算符 
+				//return Math.pow(prev,cur)
+			})
+			console.log(aaPow);
+			// for ... of
+			let arr3=['apple','banana','orange'];
+			for(let val of arr3){
+				console.log(val)
+			}
+			for(let key of arr3.keys()){
+				console.log(key)
+			}
+			for(let item of arr3.entries()){
+				console.log(item,item[0],item[1])
+			}
+			for(let [key,val] of arr3.entries()){
+				console.log(key,val)
+			}
+			for(let val of arr3.values()){
+				console.log(val)
+			}
+			/*
+				ES6新增
+				Array.from(...(扩展函数)、[].slice.call(arr)):把类数组（类数组：具备length）（获取一组元素，arguments,...）对象转化成数组 
+				Array.of:把一组值转化为 数组 如： Array.of('apple','banana') => ['apple','banana']
+				arr.find:查找，查找是否满足条件的元素，满足返回true，传回满足条件的元素，不满足返回 undefined
+				arr.findIndex查找，查找是否满足条件的元素，满足返回true，传回满足条件的位置，不满足返回 -1
+				arr.fill(填充的内容，起始位置,结束位置(不包含)):
+				arr.includes:ES2016 查询是够满足条件的元素，满足返回true 对比 indexOf
+			*/
+			let json1={
+				0:'apple',
+				1:'banana',
+				2:'orange',
+				length:2
+			}
+			let arr4=Array.from(json1); //json1 无length 为 []
+			console.log(arr4);//["apple", "banana"] 
+			let str1=arr4.find(function(val,index,arr4){
+				return val == 'apple2'
+			})
+			console.log(str1)// apple => apple apple2=>undefined
+			let num=arr4.findIndex(function(val,index,arr4){
+				return val == 'apple'
+			})
+			console.log(num)// apple => 1 apple2=>-1
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

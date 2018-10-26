@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>my</title>
+	<script src="component\vue\dist\vue.js"></script>
+	
+  </head>
+  <body>
+  <!--
+	1.公共组件屏蔽了局部主键
+	2.修改style后，页面热加载有问题，需手动刷新
+	3.slot 用途
+	4.keep-alive内部能写哪些内容，为什么写button 不展示
+  -->
+  <!-- 
+  1.is
+  2.slot 内容分发
+  3.动态组件 
+  4.keep-alive 缓存非活动的组件 ：button 必须写外面
+  -->
+    <div id="my">
+		<!-- <hello></hello>
+		<my-world><my-world> -->
+		<div>
+		{{name}}
+			<my-address></my-address>
+		</div>
+		<table>
+			<tbody is="my-row"></tbody>
+		</table>
+		<my-slot>
+			<ul slot="s1">
+				<li>1</li>
+			</ul>
+		</my-slot>
+		<!-- :is -->
+		<<button @click="flag = 'my-address'">address</button>
+		<button @click="flag = 'my-slot'">slot</button>
+		<component :is="flag"></component>
+		<!-- keep-alive -->
+		<button @click="flagKeep = 'keep-alive1'">alive1</button>
+			<button @click="flagKeep = 'keep-alive2'">alive2</button>
+			<component :is="flagKeep"></component>
+		<keep-alive>
+			<button @click="flagKeep = 'keep-alive1'">alive1</button>
+			<button @click="flagKeep = 'keep-alive2'">alive2</button>
+			<component :is="flagKeep"></component>
+		</keep-alive>
+		
+	</div>
+	<template id="myaddress">
+		<div>
+		<h2>{{address}}</h2>
+		<ul>
+			<li v-for="item in arr">{{item}}</li>
+		</ul>
+		</div>
+	</template>
+	<template id="myrow">
+		<tbody>
+			<tr>
+				<td>233442</td>
+			</tr>
+		</tbody>
+	</template>
+	<template id="myslot">
+		<div>
+		<h2>组件</h2>
+		<slot name="s1">
+			<span>333</span>
+		</slot>
+		</div>
+	</template>
+	<script>
+		
+		var vm=null;
+		/*var  myComponents=Vue.extend({
+			template:'<h2>hello</h2>'
+		});
+		Vue.component('hello',myComponents);
+		Vue.component('my-world',{
+			template:'<h2>{{content}}</h2>',
+			data(){
+				return {
+					content:'world123'
+				}
+			}
+		});*/
+		vm=new Vue({
+				el:"#my",
+				data:{
+					name:'ccy',
+					flag:'my-address',
+					flagKeep:'keep-alive1'
+				},
+				components:{
+					'my-address':{
+						template:'#myaddress',
+						data(){
+							return{
+								address:'wulan123',
+								arr:['a','b']
+							}
+						}
+					},
+					'my-row':{
+						template:'#myrow',
+						data(){
+							return{
+								address:'wulan123',
+								arr:['a','b']
+							}
+						}
+					},
+					'my-slot':{
+						template:'#myslot',
+						data(){
+							return{
+								address:'wulan123',
+								arr:['a','b']
+							}
+						}
+					},
+					'keep-alive1':{
+						template:'<h2>{{num}}</h2>',
+						data(){
+							return{
+								num:Math.random()
+							}
+						}
+					},
+					'keep-alive2':{
+						template:'<h2>{{num}}</h2>',
+						data(){
+							return{
+								num:Math.random()
+							}
+						}
+					}					
+				}
+			})	
+		window.onload=function(){
+			
+		}	
+	</script>
+  </body>
+</html>

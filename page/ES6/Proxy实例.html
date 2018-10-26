@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			window.onload=function(){
+				let oDiv=new Proxy({},{
+					get(target,property){
+						console.log(target,property)
+						return function(jsonObj={},...args){
+							let tagObj=document.createElement(property);
+							console.log(tagObj)
+							for(let key of Object.keys(jsonObj)){
+								//console.log(key,jsonObj.key)
+								tagObj.setAttribute(key,jsonObj[key])
+							}
+							args.forEach(item =>{
+								let nodeobj=''
+								if(typeof item == 'string'){
+									nodeobj=document.createTextNode(item)								
+								}else{
+									nodeobj=item
+								}
+								tagObj.appendChild(nodeobj)
+							})
+							return tagObj
+							console.log(args)
+						}
+					}
+				})
+				document.body.appendChild(
+					oDiv.div({id:'div1',class:'class1'},'aa','bbbb',
+					oDiv.a({id:'aa1',class:'aClass',href:'www.baidu.com'},'aaa','abababa',
+					oDiv.span({id:'span1',class:'spanClass'},'spanspan')
+					)
+				))
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

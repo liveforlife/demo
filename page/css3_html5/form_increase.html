@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>-->
+
+		<meta name="viewport" content="width=device.width,initial-scale=1.0" />
+		<title></title>
+		<style>
+			input{display: block;margin: 10px ;}
+		</style>
+	</head>
+	 <!--
+	 	multipart/form-data不对字符编码，用于发送二进制的文件，其他两种类型不能用于发送文件；
+ 		text/plain用于发送纯文本内容，空格转换为 "+" 加号，不对特殊字符进行编码，一般用于email之类的；
+ 		application/x-www-form-urlencoded，在发送前会编码所有字符，即在发送到服务器之前，所有字符都会进行编码（空格转换为 "+" 加号，"+"加号转换为空格，特殊符号转换为 ASCII HEX 值）。
+ -->
+ <!--
+ 	autocomplete ：自动记录功能
+ 	
+ -->
+	<body>
+		<form action="http://localhost:8213/test" method="get" autocomplete="on" target="_self" enctype="application/x-www-form-urlencoded"
+			novalidate="novalidate" name="testName" id="testID">
+			<div>
+				时间
+			<input type="date" />
+			<input type="time" />
+			<input type="week" />
+			<input type="datetime" />
+			<input type="datetime-local" />
+			</div>
+			<div>
+				number ++  range
+				<input type="number" max="100" min="50" step="5" autofocus="autofocus"/>
+				<input type="range" max="50" min="0" step="5"/>
+			</div>
+			<input type="color" name="color"/>
+			<input type="email" name="email"/>
+			<input type="search" name="search"/>
+			<input type="tel" autocomplete="on" name="tal"/>
+			<input type="url" name="url"/>
+			<input type="image" src="../../img/other/标签-logo_03.png" width="30" height="30" name="image"/>
+			<input list="browers" placeholder="选择信息" name="browers"/>
+			<datalist id="browers">
+				<option>chrome</option>
+				<option>FireFox</option>
+				<option>Internet Explorer</option>
+			</datalist>
+			<input type="file" multiple="multiple" name="file"/><!--multiple 用于上传多个文件-->
+			<input type="submit" value="submit" />
+			<!--<button type="">submit</button>-->
+		</form>
+		<!--
+			Number:转换整个值，强制转化为数字，遇到非数字字符将输出 NAN  
+			parseInt：部分转化，转化数字部分，为整数型
+			parseFloat：部分转化，转化数字部分，为浮点型
+		-->
+		<!--
+			oninput:内容一旦改变，就变更 IE9 一下不支持
+			onchange:内容改变并且失去焦点，才变更
+			onpropertychange:功能同oninput,不过为IE专有
+		-->
+		<form name="outputTest" oninput="x.value=Number(a.value)+Number(b.value)">
+			0
+			<input type="range" id="a" />
+			100
+			<input type="number" id="b" value="50" />
+			=
+			<output for="a b" name="x"></output>
+		</form>
+		<div>
+			<input type="text" pattern="[0-9A-Za-z]{0,9}" name="text" form="testID"/>
+		</div>	
+		<!--
+			Number.toFixed(x)：小数点后面X位 
+			Number.toPrecision(x) ：整个数字长度为X
+			Math.Round(x)：针对数字取整 
+		-->
+	</body>
+	<script>
+		/*
+		 *  in 操作符 用来判断属性是否在对象中
+		 * 	使用方式：单独使用，for-in
+		 * */
+		console.log('oninput' in document.createElement('input'));
+		var obj={};
+		console.log('object' == typeof document.createElement('input'));
+		console.log('object' == typeof obj);
+</script>
+</html>

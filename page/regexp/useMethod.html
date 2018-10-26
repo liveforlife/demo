@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		let str1='abc abdd kjacil      lieo poe abbbbbc'
+		let regStr=/\ab*c/g;
+		let reg=new RegExp('\ab*c','g')
+		//reg.exec
+		console.log(reg.exec(str1));
+		console.log(reg.exec(str1));
+		console.log(reg.exec(str1));
+		//reg.test
+		console.log(reg.test(str1));
+		//str.match
+		console.log(str1.match(regStr));
+		console.log(str1.match(reg))
+		//str.replace
+		let reg1=new RegExp('b{1,}','g')
+		let regStr1=/b{1,}/g
+		let str2=str1.replace(regStr1,'h') 
+		console.log(str2)
+		//str.split
+		console.log(str1.split(/\s+/))		
+		//str.search
+		console.log(str1.search(/d+/))
+		// i g m
+		//{n} {n,} {n,m} +:1次以上   *：0次以上   ?： = {0,1} 或者 非贪婪（{n}、{n,}、{n,m}、+、*、？）
+	</script>
+</html>

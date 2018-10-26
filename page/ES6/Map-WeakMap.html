@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+		/*
+		 Map:类似json.但是json的键（key）只能是字符串，map的key可以是任意类型
+			 使用：
+			 	let map1=new Map() 初始化不能赋值
+			 方法：
+			 	set() 设置一个值
+			 	get()  获取一个值 
+			 	has() 	删除一项
+			 	delete()   判断有没有
+			 	clear()  清空
+			循环：for of 默认为  entries ；forEach
+			
+				for(let [key,value] of map){}
+	
+				for(let key of map.keys()){}
+			
+				for(let value of map.values()){}
+			
+				for(let [k,v] of map.entries()){}
+			
+				map.forEach((value, key) =>{
+				    console.log(value, key);
+				})
+		WeakMap():  key只能是对象
+		 * 
+		 * */
+		let json1={
+			aa:'a',
+			bb:'b',
+			cc:'c'
+		}
+		let ae=23
+		let arr1=[1,2,3,4,5,6,7,8]
+		let map1=new Map();
+		map1.set(json1,'aaa')
+		map1.set(arr1,'bbb')
+		map1.set(ae,34)
+		console.log(map1,map1.get(json1),map1.get(ae))
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

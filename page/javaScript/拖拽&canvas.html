@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+				<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<style>
+			#drugDiv{
+    			width: 200px;height: 100px;background-color: red;/*position: absolute;top:0px;left: 0px;*/
+    		}
+		</style>
+	</head>
+	<body>
+		<div id="drugDiv" ></div>
+		<canvas id="circle" style="height: 500px;"></canvas>
+		<script>
+			/*
+			 *
+			 *  目标模块拖拽：onmousedown onmouseup
+			 * 	canvas:圆形倒计时
+			 * */
+			/*   ----- 模块拖拽 ------  */
+			
+
+			var oBody=document.getElementsByTagName('body')[0];
+			var ele=document.getElementById('drugDiv');
+			function bindEven(ele,oBody){
+				var mouseX=0,mouseY=0,eleX=0,eleY=0,clientX=0,clientY=0;
+				var drugFlag=false;
+				ele.onmousedown=function (e){
+					drugFlag=true;
+					var event= e || window.event;
+					mouseX=event.clientX;
+					mouseY=event.clientY;
+					eleX=ele.offsetLeft;
+					eleY=ele.offsetTop;
+					clientX=mouseX-eleX;
+					clientY=mouseY-eleY;
+					console.log(event);
+					// ele.offsetLeft  event.offsetX
+				}
+				oBody.onmousemove=function(e){
+					var event=e || window.event;
+					if(drugFlag){
+						console.log(222)
+						ele.style.marginLeft=event.clientX-clientX+'px';
+						ele.style.marginTop=event.clientY-clientY+'px';						
+					}
+				}
+				ele.onmouseup=function(){
+					drugFlag=false;
+				}
+			}
+			bindEven(ele,oBody);
+			/*   -------   圆形倒计时  --------   */
+			var circle=document.getElementById('circle');
+			var ctx=circle.getContext('2d');
+			CanvasRenderingContext2D.prototype.acaner=function(r,X,Y,sDex,eDex){
+				console.log('222')
+				this.save();
+				this.beginPath();
+				this.moveTo(X,Y);
+				this.arc(X,Y,r,sDex*Math.PI/180,eDex*Math.PI/180);
+				this.closePath();
+				this.restore();
+				return this;
+			}
+			var angle=0;
+			var timer=null;
+			ctx.fillStyle='red';
+			timer=setInterval(function(){
+				angle+=5;
+				ctx.acaner(50,20,20,0,angle).fill();
+				if(angle == 360){
+					clearInterval(timer);
+				}
+			},100)
+
+		</script>
+	</body>
+</html>

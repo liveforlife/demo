@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="bower_components/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="vue">
+			<div>
+				{{message}}
+			</div>
+			<div>
+				<span @click="a++">add A</span>
+				<span @click="b++">add B</span>
+			</div>
+			<div><span>{{a}}</span><span>{{b}}</span></div>
+			<div>{{sumData()}}</div>
+			<div>{{consoleLog()}}</div>
+		</div>
+	<script>
+		var vm=new Vue({
+			el:'#vue',
+			data:{
+				message:'hello world',
+				a:20,
+				b:20,
+				sum:0,
+			},
+			methods:{
+				sumData(){
+					console.log("methods")
+					return this.sum=this.a+this.b
+				},
+				consoleLog(){
+					console.log("consoleLog")
+				},
+			},
+			computed:{
+				sumData(){
+					console.log("conputed")
+					return this.sum=this.a+this.b
+				}
+			},
+			watch:{
+				a(){
+					this.sum=this.a+this.b
+				},
+				b(){
+					this.sum=this.a*1+this.b*1
+				}
+			}
+		})
+	</script>
+	</body>
+</html>

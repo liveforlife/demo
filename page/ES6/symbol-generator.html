@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+			/*
+			symbol
+			 	新增数据类型：
+			 		symbol +Number String Boolean function undefined Object
+			 	用法：
+			 		let syml = Symbol('aaa');
+			 	注意:
+					1. Symbol 不能new
+					2. Symbol() 返回是一个唯一值
+						坊间传说, 做一个key，定义一些唯一或者私有一些东
+					3. symbol是一个单独数据类型，就叫 symbol, 基本类型
+				
+					4. 如果symbol作为key，用for in循环，出不来
+			generator 生成器  解决异步深度嵌套的问题， async
+				构造：
+					function * show(){
+						yield
+					}
+				用法：
+					1、手动调用 show().nexr()
+					2、自动调用 for of
+					3、还可以
+						1. 解构赋值:
+							let [a, ...b] = gen();
+						2. 扩展运算符
+							'...'
+						
+							console.log(...gen());
+						3. Array.from()
+							console.log(Array.from(gen()));
+					4、结合 axios数据请求
+			额外知识：
+				异步: 不连续，上一个操作没有执行完，下一个操作照样开始
+				同步: 连续执行，上一个操作没有执行完，下一个没法开始
+				
+				关于异步，解决方案：
+					a). 回调函数
+					b). 事件监听
+					c). 发布/订阅
+					d). Promise对象
+			 * */
+			//基本用法
+			let sym1=Symbol('aaaa');
+			console.log(typeof sym1) //symbol
+			//用途：唯一索引
+			let json1={
+				a:'aaa',
+				[sym1]:'aa'
+			}
+			console.log(json1)//{aaa: "aaa", Symbol(aaaa): "aaa"}
+			console.log(json1['aaa'],json1[sym1])// aaa aa
+			for (key in json1) {
+				console.log(key) //  a 因为symbol 为唯一索引 并且 是私有的 所有循环不出来
+			}
+			//基本用法
+			function * gen(){
+				yield 'welcome' // 不会像async 将所有的数据结构 转化为 promise 返回
+				yield 'to'
+				yield 'ES6'
+				return `完成`
+			}
+			let g1=gen();
+			// 手动调用 
+			console.log(g1.next())// {value: "welcome", done: false}
+			let g2=gen();
+			// for  of  自动调用
+			for(item of g2){
+				console.log(item) //welcome to ES6  return 的数据不会返回
+			}
+			let [g11,g22,g33]=gen();
+			let [g111,g222]=gen();
+			console.log(g11,g22,g33) //welcome to ES6
+			console.log(...gen()); //welcome to ES6
+			function showG(...g){
+				console.log(g) // ["welcome", "to", "ES6"]
+			}
+			showG(...gen())
+			console.log(Array.from(gen())) // ["welcome", "to", "ES6"]
+			//genetator 结合 axios  测试
+			function * gitHubInfo(){
+				yield 'ccy'
+				yield axios.get(`https://api.github.com/users/${val}`)
+			}
+			let gitHub=gitHubInfo();
+			let val=gitHub.next().value;
+			gitHub.next(val).value.then(res=>{
+				console.log(res)
+			})
+		</script>
+		
+	</head>
+	<body>
+	</body>
+</html>

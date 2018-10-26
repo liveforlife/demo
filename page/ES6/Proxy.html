@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 Proxy  代理     扩展对象的功能
+			 	作用: 比如vue中拦截  预警、上报、扩展功能、统计、增强对象等等   proxy是设计模式一种，  代理模式
+						
+			 	基本用法
+			 		new Proxy(target, handler);
+					let obj = new Proxy(被代理的对象,对代理的对象做什么操作)
+					handler:
+					{
+						set(){},  //设置的时候干的事情
+						get(){},  //获取干的事情
+						deleteProperty(){},  //删除
+						has(){}  //问你有没有这个东西  ‘xxx’ in obj
+						apply()  //调用函数处理
+						.....
+					}
+					实现一个，访问一个对象身上属性，默认不存在的时候给了undefined，希望如果不存在错误(警告)信息：
+			 Reflect.apply(调用的函数，this指向，参数数组);
+				fn.call()
+				fn.apply()  类似
+				Reflect: 反射
+					Object.xxx  语言内部方法
+				
+						Object.defineProperty
+				
+					放到Reflect对象身上
+				
+					通过Reflect对象身上直接拿到语言内部东西
+				
+					'assign' in Object    ->   Reflect.has(Object, 'assign')
+				
+					delete json.a	    ->   Reflect.deleteProperty(json, 'a');
+			 * */
+			//基本用法
+			let json1={
+				name:'aaa',
+				age:19,
+				show(){
+					console.log(`姓名为${this.name}`)
+				}
+			}
+			let pro1=new Proxy(json1,{
+				set(target,proprety,val){
+					console.log(`设置属性${property}为${val}`)
+					target[property]=val
+				},
+				get(target,property){
+					console.log(target,property)
+					if(property in target){
+						return target[property]
+					}else{
+						return `属性不存在`
+					}
+				},
+				has(target,property){
+					console.log(`查找属性${property}`)
+					return property in target
+				},
+				deleteProperty(target,property){
+					console.log(`删除属性${property}`)
+					return  delete target.property
+				},
+				apply(target, context, args){
+	                //console.log(target, context, args);
+	                //console.log(...arguments);
+	                return Reflect.apply(...arguments);
+	            }
+			})
+			console.log(pro1.name,pro1.age,pro1.skill)
+			
+			function show(...args){
+	            console.log(this);
+	            console.log(args);
+	        }
+	
+	        //show(1,2,3,4);
+	
+	        //show.call('abc', 1,2,3,4);
+	        //show.apply('abcd',[1,2,3,4]);
+	
+	        Reflect.apply(show, 'aaaa', [1,2,3,4]);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

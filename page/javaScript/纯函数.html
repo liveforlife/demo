@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="fil"/>
+		<div id="">
+			111111
+		</div>
+		<script>
+			/* 
+			 * 路由 hash:
+			 * 		测试方法 ：加上#red #blue 点击前后跳转按钮 
+			 * 		结论：hash发生变化的url都会被浏览器记录下来，从而你会发现浏览器的前进后退都可以用了，同时点击后退时，页面字体颜色也会发生变化。
+			 * 				这样一来，尽管浏览器没有请求服务器，但是页面状态和url一一关联起来，后来人们给它起了一个霸气的名字叫前端路由，成为了单页应用标配
+			 * */
+			window.onhashchange=function(event){
+				console.log(event)
+				let hash=location.hash.slice(1)
+				document.body.style.backgroundColor=hash
+			}
+			console.log('//// 数据传入函数，只是传入的引用数组的存储地址，原数组会跟着改变 ///');
+			var arr=[{name:'aaa'}];
+			function add(_arr){
+				var obj={name:'sss'};
+				_arr.push(obj)
+			}
+			add(arr);
+			console.log(arr)	//      [{name: "aaa"},{name: "sss"}]
+			console.log('//// 数组进行复制一份，可是对象仍然是同一份 ///');
+			var arr1=[{name:'aaa'}];
+			function add1(_arr){
+				var obj={name:'dddd'};
+				var newArr=[];
+				_arr.push(obj);
+				for (var i=0;i<_arr.length;i++) {
+					newArr[i]=_arr[i];
+				}
+				return newArr;
+			}
+			var newArr=add1(arr1);
+			console.log(newArr); //      [{name: "bbb"},{name: "dddd"}]
+			newArr[0].name='bbb';
+			console.log('///////');
+			console.log(newArr);//      [{name: "bbb"},{name: "dddd"}]
+			console.log(arr1)	//      [{name: "bbb"},{name: "dddd"}]
+			console.log('///////');
+			
+			console.log('//// 数组进行复制一份，对象复制一份，构建纯函数 ///');
+			var arr2=[{name:'aaa'}];
+			function add2(_arr){
+				var obj={name:'dddd'};
+				var newArr=[];
+				_arr.push(obj);
+				for (var i=0;i<_arr.length;i++) {
+					newArr[i]=deepClone(_arr[i]);
+				}
+				return newArr;
+			}
+			function deepClone(obj){
+				var newobj={};
+				for (var key in obj) {
+					if(typeof obj[key] == 'object'){
+						deepClone(obj[key])
+					}else{
+						newobj[key]=obj[key]
+					}
+				}
+				return newobj;
+			}
+			var newArr2=add2(arr2);
+			console.log(newArr2[0]); //      [{name: "bbb"},{name: "dddd"}]
+			newArr2[0].name='bbb';
+			console.log('///////');
+			console.log(newArr2);//      [{name: "bbb"},{name: "dddd"}]
+			console.log(arr2)	//      [{name: "bbb"},{name: "dddd"}]
+			console.log('///////');
+			/*
+			 *     使用例子： 输入姓名查找
+			 * */
+			var peopleJson=[
+				{name:'王丽',sex:'m'},
+				{name:'李星',sex:'w'},
+				{name:'王力',sex:'m'},
+				{name:'李兴',sex:'w'},
+				{name:'王立',sex:'m'}
+			];
+			var output=document.getElementById('fil');
+			output.oninput=function(){
+				var arrText=filter(this.value,peopleJson);
+				console.log(arrText);
+				console.log(arrText.length);
+			}
+			function filter(val,jsonP){
+				if(output ==''){
+					return jsonP;
+				}else{
+					var newPeople=[];
+					for (var i=0 ;i<jsonP.length ; i++) {
+						jsonP[i].name.indexOf(val) != -1 ? newPeople.push(deepClone(jsonP[i])) :'';
+						//对比：   jsonP[i].name.indexOf(val) != -1 ? newPeople[i]=deepClone(jsonP[i]) :'';
+					}
+					return newPeople;
+				}
+			}
+		</script>
+	</body>
+</html>

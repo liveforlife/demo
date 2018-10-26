@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			// 进制
+			let binary1=0b010101 //二进制
+			let o=0o234567      //八进制
+			console.log(binary1,o) // 21  80247
+			//Number 
+			console.log(Number.isNaN(NaN),Number.isFinite(3),Number.isFinite('222'),Number.isInteger(2.3))  //true true false false
+			//安全数 -(2^53-1)  (2^53+1)
+			console.log(Number.isSafeInteger(-(2**53)),Number.isSafeInteger(2**53))// false false
+			console.log(Number.isSafeInteger(-(2**53-1)),Number.isSafeInteger(2**53-1))//true true
+			console.log(Number.MAX_SAFE_INTEGER,Number.MIN_SAFE_INTEGER) //9007199254740991 -9007199254740991
+			//Math
+			console.log(Math.sqrt(4),Math.trunc(4.99))//2 4
+			console.log(Math.sign(-100),Math.sign(0),Math.sign(-0),Math.sign(100)) //-1 0 -0 1
+			console.log(Math.cbrt(27)) // 3
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

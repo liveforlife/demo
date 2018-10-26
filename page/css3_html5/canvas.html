@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img style="display: none;" src="../../img/css3_html5/testOne.jpg" id="myImg" />
+		<canvas id="mycanvas"  width="800" height="800"  style="background-color: red;">
+			您的浏览器不支持 HTML5 canvas 标签
+		</canvas>
+		<canvas id="mycanvasOne"  width="800" height="800"  style="border: 1px  solid red;">
+			您的浏览器不支持 HTML5 canvas 标签
+		</canvas>
+		<div style="display: flex;flex-direction: row;">
+			<video id="video1" style="width: 200px;height: 200px;" autoplay controls="controls">
+				<source src="../../img/css3_html5/mov_bbb.mp4" type="audio/mp4"></source>
+			</video>
+			<canvas id="mycanvasTwo" width="800" height="800" style="border: 1px solid green;"></canvas>
+		</div>
+		
+		<script>
+			/*
+			 问题：
+			 		createPattern 失败:因为图片加载的原因
+			 		清除shadowBlur对后面绘图的影响 使用 save() restore()
+			 * */
+			var myCanvas=document.getElementById('mycanvas');
+			var myContent=myCanvas.getContext('2d');
+			/* 线 : closePath()  clip() isPointInPath() */ 
+			myContent.beginPath();
+			myContent.moveTo(50,50);
+			myContent.lineTo(50,150);
+			myContent.lineTo(170,150);
+			myContent.strokeStyle='#FFF';
+			myContent.stroke();
+			myContent.quadraticCurveTo(130,180,200,180);// 创建二次贝塞尔曲线
+			myContent.stroke();
+			myContent.beginPath();
+			myContent.moveTo(50,250);
+			myContent.bezierCurveTo(100,150,130,300,150,250);// 创建三次方贝塞尔曲线
+			myContent.stroke();
+			/* 圆   */
+			myContent.beginPath()
+			myContent.moveTo(400,100);
+			myContent.arc(450,150,50,0,2*Math.PI);//context.arc(x,y,r,sAngle,eAngle,counterclockwise);counterclockwise:False = 顺时针，true = 逆时针。
+			myContent.strokeStyle='blue';
+			myContent.fillStyle="aqua"
+			myContent.fill();	// 填充颜色
+			myContent.stroke();
+			/* 弧  */
+			myContent.beginPath();
+			myContent.moveTo(400,430);
+			myContent.lineTo(450,430);
+			myContent.arcTo(450,230,550,280,50);
+			myContent.lineTo(525,430);
+			myContent.lineTo(450,430);
+			myContent.strokeStyle="yellow";
+			myContent.stroke();
+			/*  矩形  */
+			myContent.beginPath();
+			myContent.rect(600,100,100,100);
+			myContent.fillStyle='orange';
+			myContent.fill();
+			myContent.fillStyle='green';
+			myContent.fillRect(600,300,100,100);
+			myContent.clearRect(640,340,20,20);
+			myContent.strokeRect(600,450,100,100);
+			console.log(myCanvas.height)
+			/* 文本   measureText()    */
+			myContent.font="italic small-caps bold 40px Arial";
+			myContent.textAlign='start';
+			myContent.textBaseline='bottom';
+			myContent.fillText('hello world',50,400)
+			myContent.font="italic small-caps bold 40px Arial";
+			myContent.textAlign="right"  //  textAlign: start == left  end == right  center
+			myContent.textBaseline='top' //  textBaseline: alphabetic top hanging  middle ideographic  bottom
+			myContent.strokeText('hello world',200,450)
+			myContent.font="30px Verdana";
+			// 创建渐变
+			var gradient=myContent.createLinearGradient(0,0,200,0);
+			myContent.textAlign="center"
+			gradient.addColorStop("0","magenta");
+			gradient.addColorStop("0.5","blue");
+			gradient.addColorStop("1.0","yellow");
+			// 用渐变填色
+			myContent.strokeStyle=gradient;// strokeStyle fillStyle 渐变可用于填充矩形、圆形、线条、文本等等。
+			myContent.strokeText("com.cn",150,500);
+			
+			
+			//线条样式  lineWidth  lineJoin  lineCap  miterLimit
+			var myCanvasOne=document.getElementById('mycanvasOne');
+			var myContentOne=myCanvasOne.getContext('2d');
+			myContentOne.beginPath();
+			myContentOne.moveTo(20,20);
+			myContentOne.lineTo(120,120);
+			myContentOne.lineTo(20,220);
+			myContentOne.lineTo(120,220);
+			myContentOne.lineWidth=10;
+			myContentOne.lineCap="butt";   //round butt square
+			myContentOne.lineJoin="bevel";  //  bevel  round  miter
+			myContentOne.stroke();
+			myContentOne.save();
+			//颜色、样式和阴影 
+			//属性： fillstyle strokeStyle shadowColor shadowBlur shadowOffsetX shadowOffsetY 
+			// fillstyle strokeStyle ：使用 颜色 、createLinearGradient() 、 createPattern() 、createRadialGradient()
+			myContentOne.beginPath();
+			myContentOne.rect(200,50,100,100);
+			 myContentOne.shadowBlur=10;
+			 myContentOne.shadowColor="black";
+			 myContentOne.shadowOffsetX=10;
+			 myContentOne.shadowOffsetY=20;
+			 myContentOne.stroke();
+			 myContentOne.fillStyle='blue';
+			 myContentOne.fill();
+			//方法：createLinearGradient()  createPattern() createRadialGradient()  addColorStop():配合createLinearGradient 和 createRadialGradient使用	
+			 myContentOne.restore();
+			myContentOne.beginPath();
+			var linearG=myContentOne.createLinearGradient(200,200,300,300);
+			linearG.addColorStop(0,"yellow");
+			linearG.addColorStop(1,'red');
+			myContentOne.fillStyle=linearG;
+			myContentOne.fillRect(200,200,100,100);
+			myContentOne.beginPath();
+			var radialG=myContentOne.createRadialGradient(400,100,20,420,120,100);
+			radialG.addColorStop(0,"orange");
+			radialG.addColorStop(1,"green");
+			myContentOne.fillStyle=radialG;
+			myContentOne.fillRect(350,50,100,100);
+			myContentOne.beginPath();
+			var img = new Image();
+	        img.src = "../../img/css3_html5/uploadQualification.png";
+	        img.onload = function(){//等到图片加载进来之后
+	            var pat = myContentOne.createPattern(img,"repeat");
+	            myContentOne.fillStyle=pat;
+	            myContentOne.fillRect(350,200,100,100);
+	        }
+	        /* 无效 
+ 			var myImg=document.getElementById('myImg');
+			var pat=myContentOne.createPattern(myImg,"repeat");
+			myContentOne.fillStyle=pat; 
+			myContentOne.fillRect(550,300,100,100);
+ */
+			//转换	scale()   rotate() translate()  transform()  setTransform()
+			
+			
+			//图像绘制
+			var img1=new Image();
+			img1.src="../../img/css3_html5/testOne.jpg";
+			img1.onload=function(){
+				myContentOne.drawImage(img1,450,300)
+			}
+ 			var myImg2=new Image();
+ 			myImg2.src='../../img/css3_html5/testOne.jpg';
+ 			myImg2.onload=function(){
+ 				myContentOne.drawImage(myImg2,250,450,100,100);
+ 			}
+ 			var myImg3=document.getElementById('myImg');
+ 			myImg3.onload=function(){
+ 				myContentOne.drawImage(myImg2,100,100,100,100,250,300,100,100);
+ 			}
+ 			
+ 			var myCanvasTwo=document.getElementById('mycanvasTwo');
+ 			var myContentTwo=myCanvasTwo.getContext('2d');
+ 			var myVideo=document.getElementById("video1");
+ 			myVideo.addEventListener('play',function(){
+ 				var i=window.setInterval(function(){
+ 					myContentTwo.drawImage(myVideo,20,20);
+ 				},20)
+ 			},false);
+ 			myVideo.addEventListener('pause',function(){
+ 				window.clearInterval();
+ 			},false);
+ 			myVideo.addEventListener('ended',function(){
+ 				clearInterval()
+ 			});
+			//像素操作 width  height  data createImageData getImageData putImageData
+			var imageData=myContentTwo.createImageData(200,200);
+			for (var i=0;i<imageData.data.length;i+=4) {
+				imageData.data[i]=255;
+				imageData.data[i+1]=0;
+				imageData.data[i+2]=0;
+				imageData.data[i+3]=255;
+			}
+			myContentTwo.putImageData(imageData,350,20);
+			var imageDataOne=myContentTwo.createImageData(imageData);
+			for (var i=0;i<imageDataOne.data.length;i+=4) {
+				imageDataOne.data[i]=0;
+				imageDataOne.data[i+1]=255;
+				imageDataOne.data[i+2]=255;
+				imageDataOne.data[i+3]=255;
+			}
+			myContentTwo.putImageData(imageDataOne,550,20);
+			var imageDataTwo=myContentOne.getImageData(350,50,100,100);
+			console.log(imageDataTwo);
+			myContentTwo.putImageData(imageDataTwo,350,220);
+			//合成     globalAlpha   globalCompositeOperation
+			
+			//其他     save()  restore()  createEvent() getContext() toDataURL()
+			
+		</script>
+	</body>
+</html>

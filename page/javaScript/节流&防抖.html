@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+	</head>
+	<body>
+		<p id="num" style="border: 1px solid #000;width: 100px;height: 30px;"></p>
+		<button id="byn" type="button" onclick="addNum()">点击</button>
+		<div>防抖</div>
+		<input type="text" id='search' />
+		<script>
+			/*
+			 *	节流：抢购 等需要连续点击的事件
+			 * 	防抖：输入框 输入信息 ，停顿一段时间在发送请求
+			 * */
+			/*  ----      节流       -------*/
+			var  total=0
+			function addtext(){
+				total=total+1;
+				console.log(total);
+				G('num').innerHTML=total;
+				//document.getElementById('num').innerHTML=total;
+			}
+			var addNum=throttl(addtext,1000);
+			function throttl(handler,timer){
+				var lastTimer=0;
+				return function(e){
+					var nowTimer=new Date().getTime();
+					if(nowTimer - lastTimer >timer){
+						handler();
+						lastTimer=nowTimer;
+					}
+				}
+				
+			}
+			function G(val){
+				return document.getElementById(val);
+			}
+			/*  -------    防抖      ------------   */
+			G('search').oninput=dobounce(ajax(),500)
+			function dobounce(handle,value){
+				var wait=null;
+				return function(){
+					var _self=this,_arg=arguments;
+					clearTimeout(wait);
+					wait=setTimeout(function(){
+						ajax.apply(_self,_arg);
+					},value);
+				}
+			}
+			function ajax(e){
+				console.log(e,this.value)
+			}
+		</script>
+	</body>
+</html>

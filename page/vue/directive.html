@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="bower_components/vue/dist/vue.js"></script>
+		<style>
+			.red{
+			    color:red;
+			    border:1px solid #e93030;
+			}
+			.grey{
+			    color:green;
+			    border:1px solid green;
+			}
+			.orange{
+			    color:orange;
+			    border:1px solid orange;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myVue">
+			<ul>
+				<li v-for="item in arry">{{item.status | statusFomar(10,20)}}</li>
+			</ul>
+			<ul>
+				<li v-bind:class="item.status | formatclass" v-for="item in arry">{{item.status | statusFomarLiline}}</li>
+			</ul>
+		</div>
+		<script>
+			/*
+			 	filter ：用在两个地方：双花括号插值和 v-bind 表达式 
+			 	dirextive
+			 * */
+			window.onload=function(){
+				Vue.filter("statusFomar",function(value, arg1, arg2){
+					console.log(arg1,arg2)
+					switch(value){
+								case 0:
+								 return '未连接';
+								case 1:
+								 return '已连接';
+								 case 2:
+								  return '已断开';
+								default :
+									return '其他'
+							}
+				})
+				var vm=new Vue({
+					el:'#myVue',
+					data:{
+						arry:[
+							{
+								status:0
+							},{
+								status:1
+							},{
+								status:2
+							}
+						],
+						form:{
+							status:0
+						},
+					},
+					methods:{
+						
+					},
+					computed:{
+						
+					},
+					watch:{
+						
+					},
+					filters:{
+						statusFomarLiline(data){
+							switch(data){
+								case 0:
+								 return '未连接';
+								case 1:
+								 return '已连接';
+								 case 2:
+								  return '已断开';
+								default :
+									return '其他'
+							}
+						},
+						formatclass(value){
+							return value == 0 ? 'red':(value == 1 ? 'orange': 'grey')
+						}
+					}
+				})
+				
+			}
+		</script>
+	</body>
+</html>

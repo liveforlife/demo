@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="bower_components/vue/dist/vue.js"></script>
+		<style>
+			.inputClass{
+				border: 2px solid red;
+			}
+			.spanClass{
+				border: 2px solid red;
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				border-radius:5px ;
+			}
+			.disabled{
+				color: hotpink;
+			}
+		</style>
+		<script>
+			/*
+			 * 插值语法不能作用在 HTML 特性上，因此使用 v-bind 指令
+				v-bind:
+				 	1)v-bind在一般特性上的使用：如id,src,disabled,checked,selected,name
+				 	2) class 上的使用
+				 	3)style 上的使用
+			 * */
+			window.onload=function(){
+				var vm=new Vue({
+					el:'#myApp',
+					data(){
+						return {
+							msg:'v-bind',
+							inputId:'appInput',
+							inputName:'appAll',
+							disabledFlag:true,
+							imgSrc:'../../img/baiduApi/point/专线@2x.png',
+							classFlag:true,
+							classFlagFals:false,
+							className:'spanClass',
+							spanColor:'red',
+							colorObj:{
+								color:'red'
+							},
+							fontObj:{
+								fontSize:'40px'
+							}
+						}
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="myApp">
+			<!--  一般特性  -->
+			<input :id="inputId" :disabled="disabledFlag" :name="inputName" value="222">
+			<img :src="imgSrc">
+			{{disabledFlag}}
+			<!-- 在class上使用 -->
+			<input :class="{inputClass:classFlag}">
+			<span :class="[className]">aaaaaa</span>
+			<input :class="{inputClass:classFlag,disabled:true}">
+			<span :class="[className,{disabled:true}]">aaaa</span>
+			<!-- 在style上使用 -->
+			<span :style="{color:spanColor}">33333</span>
+			<span :style="{color:spanColor,fontSize:'30px'}">44444</span>
+			<span :style="[colorObj]">55555</span>
+			<span :style="[colorObj,fontObj]">66666</span>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="module">
+			/*
+			 	模块化：
+			 		之前：js 不支持模块化 ：其他语言：ruby require('')  python import('')
+			 		ES6之前，社区制定一套规则：
+			 			commonJs  主要是服务端 nodeJs
+			 			AMD  requireJs curUs
+			 			CMD seaJs
+			 		ES6制定的模块化：
+			 		
+			 * */
+			//import './import/export.js'
+			//import {showABC,showDDD} from './import/export.js'
+			import {aaa,bbb} from './import/export2.js'
+			import {a as aa, b as bb} from './import/export1.js'
+			import * as numJson from './import/export3.js'
+			//showABC()
+			//showDDD()
+			import('./import/export.js').then(res =>{
+				res.showABC() //返回值，是个promise对象
+			})
+			import mod,{show,name,age} from './import/exportDefault.js'
+			console.log(aaa,bbb)
+			console.log(aa,bb)
+			console.log(numJson.a, numJson.b)
+			let peo=new mod('aaaa',29);
+			peo.show()
+			console.log(name,age)
+			Promise.all([
+				import('./import/export4.js'),
+				import('./import/export5.js')
+			]).then(([mod1,mod2]) =>{
+				let {a,b}=mod1;
+				let def=mod2.default
+				console.log(mod1,mod2)
+				console.log(a,b,def)
+			})
+			async function main(){
+				let res=await import('./import/export6.js')
+				console.log(res.count)
+				res.addCount()
+				console.log(res.count)
+			}
+			main()
+			
+		</script>
+		
+	</head>
+	<body>
+	</body>
+</html>

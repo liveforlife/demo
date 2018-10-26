@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>my</title>
+	<script src="component\vue\dist\vue.js"></script>
+	<script>
+		var vm=null;
+		window.onload=function(){
+			vm=new Vue({
+				el:"#my",
+				data:{
+					name:'ccy',
+					flag:'my-address'
+				},
+				
+				components:{
+					'my-parent':{
+						template:'#parent',
+						data(){
+							return {
+								pname:'qq',
+								page:'20',
+								cname:'',
+								cage:''
+							}
+						},
+						methods:{
+							getChild(name,age){
+								this.cname=name;
+								this.cage=age;
+							}
+						},
+						components:{
+							'my-child':{
+								template:'#child',
+								props:['massage1','massage2'],
+								data(){
+									return{
+										cname:'pp',
+										cage:'10'
+									}									
+								},
+								methods:{
+									send(){
+										this.$emit("c-child",this.cname,this.cage)
+									}
+								},
+								mounted(){ //生命周期
+									this.send();
+								}
+							}
+						}
+					}
+				}	
+			})	
+		}	
+	</script>
+  </head>
+  <template id="parent">
+	<div>
+		父组件的名字：{{pname}} 年级：{{page}}
+		子组件的名字：{{cname}} 年级：{{cage}}
+		<my-child :massage1="pname" :massage2="page" @c-child="getChild"></my-child>
+	</div>
+  </template>
+  <template id="child">
+	<div>
+		父组件的名字：{{massage1}} 年级：{{massage2}}
+		子组件的名字：{{cname}} 年级：{{cage}}
+		<button @click="send">传参给父组件</button>
+	</div>
+  </template>
+  <body>
+    <div id="my">
+		<my-parent ></my-parent>
+	</div>
+  </body>
+</html>

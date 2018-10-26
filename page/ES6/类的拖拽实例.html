@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+			#drag1{left: 0px;}
+			#drag2{right: 0px;}
+		</style>
+
+	</head>
+	<body>
+		<div id="drag1"></div>
+		<div id="drag2"></div>
+		<script>
+			class Drag{
+				constructor(id){
+					this.oDiv=document.querySelector(id)
+					console.log(this.oDiv)
+					this.eleX=0
+					this.eleY=0
+					this.init()
+				}
+				init(){
+					this.oDiv.onmousedown=function(ev){
+						console.log('aaaa')
+						this.eleX=ev.clientX-this.oDiv.offsetLeft;
+						this.eleY=ev.clientY-this.oDiv.offsetTop;
+						document.onmousemove=this.bodyMove.bind(this)
+						document.onmouseup=this.bodyUp
+					}.bind(this)
+				}
+				bodyMove(ev){
+					console.log('bbb')
+					this.oDiv.style.left=ev.clientX-this.eleX+'px'
+					this.oDiv.style.top=ev.clientY-this.eleY+'px'
+				}
+				bodyUp(){
+					document.onmousemove=null
+					document.onmouseup=null
+				}
+			}
+			class limitDrag extends Drag{
+				bodyMove(ev){
+					super.bodyMove(ev);
+					if(this.oDiv.offsetLeft <0){
+						this.oDiv.style.left='0px'
+					}
+				}
+			}
+			let drag1=new Drag('#drag1');
+			let drag2=new limitDrag('#drag2');	
+		</script>
+	</body>
+</html>

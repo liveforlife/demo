@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+		/*
+		 	类 ：属性 方法
+		 	注意： 
+				1. ES6里面class没有提升功能，在ES5，用函数模拟可以，默认函数提升
+				2. ES6里面this 比之前轻松多了
+			矫正this:
+				1. fn.call(this指向谁, args1, args2....)
+				2. fn.apply(this指向谁, [args1, args2....])
+				3. fn.bind()
+		 * */
+		//ES6之前的类构造方式
+		function People(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		Object.assign(People,{
+			showName(){
+				console.log(`姓名${this.name}`)
+			},
+			showAge(){
+				console.log(`年级${this.age}`)
+			}
+		})
+//		People.prototype.showName=function(){
+//			console.log(`姓名${this.name}`)
+//		}
+		var p1=new People('ccy',20);
+		console.log(p1.name); //ccy
+		p1.showName(); //姓名ccy
+		//ES6 之前的继承方式
+		function Student(name,age,skill){
+			People.call(this,name,age);// 矫正this, 方法有：call、apply、bind
+			this.skill=skill
+		}
+		Student.prototype=new People();
+		Student.prototype.showSkill=function(){
+			console.log(this.skill)
+		}
+		var stu1=new Student('ccy',20,'singing');
+		stu1.showName(); //姓名ccy
+		stu1.showSkill();//singing
+		console.log(stu1.name,stu1.age,stu1.skill);//ccy 20 singing
+		//ES6 类构造方法
+		let a='ccy'
+		let b='hsh'
+		class Car{
+		//var Car=class{   等效于上面
+			constructor(length,weight) {
+				this.length=length;
+				this.weight=weight;
+			}
+			static showStatic(){
+				console.log(`这是类方法`)
+			}
+			get getLength(){
+				return this.length
+			}
+			set setLength(length){
+				this.length=length
+			}
+			showLength(){
+				console.log(this.length)
+			}
+			showWeight(){
+				console.log(this.weight)
+			}
+			[a+b](){                   //变形 
+				console.log(`变形一`)
+			}
+			[a](){
+				console.log(`变形二`)
+			}
+		}
+		let car1=new Car(124,23);
+		car1.showWeight();// 23
+		car1.setLength=100;
+		console.log(car1.getLength);//100
+		Car.showStatic();//这是类方法
+		car1[a+b]() //变形一
+		car1.ccyhsh()  // 变形一
+		car1[a]()  //变形二
+		car1.ccy() //变形二
+		//变形同样适用json
+		let json1={
+			[a+b]:'pear',
+			[a]:'grape'
+		}
+		console.log(json1,json1[a+b],json1[a],json1.ccy);//{ccyhsh: "pear", ccy: "grape"} "pear" "grape" "grape"
+		//ES6继承
+		class BYD extends Car{
+			constructor(...args){
+				super(...args) //方法用
+				console.log(args)
+				this.value=args[2]
+			}
+			showWeight(){
+				super.showWeight();//super 当做对象
+				console.log(`这是子类`)
+			}
+		}
+		let byd1=new BYD(23,90,'$120');
+		console.log(byd1.length,byd1.value) //23 "$120"
+		byd1.showWeight() //90 这是子类
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

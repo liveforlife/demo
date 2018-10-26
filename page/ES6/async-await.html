@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 async -- await
+			 	针对异步操作的对比 ：promise generator async
+			 特点:
+				1. await只能放到async函数中
+				2. 相比genrator语义化更强
+				3. await后面可以是promise对象，也可以数字、字符串、布尔
+				4. async函数返回是一个promise对象
+				5. 只要await语句后面Promise状态变成 reject, 那么整个async函数会中断执行
+				        处理方式：
+						1).try{}catch(e){}
+						2).promise 本身的catch
+			 * */
+		
+		async function fn(){
+			let a=await Promise.resolve('aaaa')
+			console.log(typeof a,a)
+		}
+		let f1=fn();
+		console.log(typeof fl)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

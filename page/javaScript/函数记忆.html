@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//数学模型  5!=5*4*3*2*1
+			var  count=0
+			function Factorial(n){
+				count++;
+				if(n == 0 || n == 1){
+					return 1;
+				}else{
+					return n*Factorial(n-1);
+				}
+			}
+			console.time('first');
+			console.log(Factorial(3));
+			console.log(count);
+			console.timeEnd('first');
+			console.time('second');
+			console.log(Factorial(5));
+			console.timeEnd('second');
+			console.time('three');
+			console.log(Factorial(5));
+			console.timeEnd('three');
+			
+			//一般记忆功能
+			var countCache=0
+			var cache=[];
+			function FactorailCache(n){
+				countCache++
+				if(cache[n]){
+					return cache[n];
+				}else{
+					if(n == 0 || n == 1){
+						cache[0]=1;
+						cache[1]=1;
+						return 1;
+					}else{
+						cache[n]=n*FactorailCache(n-1);
+						return cache[n];
+					}
+				}
+			}
+			console.time('first');
+			console.log(FactorailCache(3));
+			console.log(countCache);
+			console.timeEnd('first');
+			console.time('second');
+			console.log(FactorailCache(5));
+			console.timeEnd('second');
+			console.time('three');
+			console.log(FactorailCache(5));
+			console.timeEnd('three');
+			
+			//闭包模式的记忆函数
+			function memorize(fn){
+				var cache={};
+				return function(){
+					var key=arguments.length+Array.prototype.join.call(arguments);
+					if(cache[key]){
+						return cache[key]
+					}else{
+						cache[key]= fn.apply(this,arguments);
+						return cache[key]
+					}
+				}
+			}
+			var newF=memorize(Factorial)
+		</script>
+	</body>
+</html>

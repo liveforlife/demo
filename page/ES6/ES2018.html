@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 1、命名捕获法
+			 2、dotALL
+			 3、标签函数
+			 * */
+			//
+			//命名捕获法 ?<>  \k<> 等价于 \1
+			let str3='2018-09-02'
+			let reg1=/^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/
+			let arr1=str3.match(reg1)
+			let {year,month,day}=arr1.groups
+			console.log(year,month,day) // 2018 09 02
+			let str6=str3.replace(reg1,'$<day>/$<month>/$<year>')
+			let str7=str3.replace(reg1,function(...args){
+				let {year,month,day}=args[args.length-1]
+				return `${day}/${month}/${year}`
+			})
+			console.log(str7)  //   02/09/2018
+			console.log(str6)  //   02/09/2018
+			let str4='app-app'
+			let str5='app-applic'
+			let reg2=/^(?<name>app)-\k<name>$/
+			console.log(reg2.test(str4)) // true
+			console.log(reg2.test(str5))  //false
+			//dotAll s
+			 let reg=/^\d+.\d+$/s
+			 let str1='2222\n3333'
+			 let str2='2222@9999'
+			 console.log(reg.test(str1))
+			 console.log(reg.test(str2))
+			//标签函数
+			function show(args){
+				console.log(args) // Array(1)0: "welcome"length: 1raw: ["welcome"]0: "welcome"length: 1__proto__: Array(0)__proto__: Array(0)
+				console.log(args[0])  //  [welcome,aaaaa]
+			}
+			show`[welcome,aaaaa]`
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
