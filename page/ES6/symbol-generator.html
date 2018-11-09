@@ -59,6 +59,19 @@
 			for (key in json1) {
 				console.log(key) //  a 因为symbol 为唯一索引 并且 是私有的 所有循环不出来
 			}
+			
+			let uid=Symbol.for('uid');
+			console.log(Symbol.keyFor(uid))//uid
+			let uid2=Symbol.for('uid');
+			console.log(Symbol.keyFor(uid2))//uid
+			let uid3=Symbol('uid')
+			console.log(Symbol.keyFor(uid3))//undefined
+			let objSymbel={
+				[uid]:'uid'  //为什么要添加[] 添加[] 表示 私有的, 不添加 表示公开的
+			}
+			console.log(Object.getOwnPropertyNames(objSymbel)) //["uid"]  []
+			console.log(Object.getOwnPropertySymbols(objSymbel))  //[]  Symbol(uid)]
+ 			console.log(Object.keys(objSymbel)) //["uid"] []
 			//基本用法
 			function * gen(){
 				yield 'welcome' // 不会像async 将所有的数据结构 转化为 promise 返回

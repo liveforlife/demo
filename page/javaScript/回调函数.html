@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/* 
+			1、null:字段不可用
+			2、undefined ： 定义时，没有被初始化
+		 */
+		function sortArr(arr,callback){ //回调函数
+			arr.push(100)
+			callback()
+		}
+		var a=[0,1,2,3,4,5,6]
+		sortArr(a,function(){
+				console.log(`执行完成${a}`)
+		})
+		function strict(){ //use stirct 严格模式
+		// 报错：Uncaught ReferenceError: b is not defined  否则会 自动补全
+		//'use strict' 
+			b=10
+			console.log(b)
+		}
+		strict();
+		/* 
+		 IIFEs:Immediately Invoked Function Expressions 立即执行函数 避免污染全局函数 内部函数 外部无法访问
+		 */
+		(function(){
+			console.log('hello world',b)
+		})(b)
+		for(var i=0;i<b;i++){
+			setTimeout((function(){
+				console.log(i)
+			})(i),1000)
+		}
+		/*  prototype 调用函数：对象比较 */
+		Object.prototype.compareObject=function compareObject(x,y){
+			if(x===y){
+				return true
+			}
+			if(typeof(x) != Object || typeof(y) != Object){
+				return false
+			}
+			for(a in x){
+				if(!y.hasOwnProperty(p)){
+					return false
+				}
+				if(x[a] === y[a]){
+					continue
+				}
+			}
+			for(p in y){
+				if(y.hasOwnProperty(p) && !x.hasOwnProperty(p)){
+					return false
+				}
+			}
+			return true
+		}
+		var obj1={
+			name:'ccy',
+			age:'12'
+		}
+		var obj2=obj1
+		var obj3={
+			name:'ccy',
+			age:12
+		}
+		console.log(Object.compareObject(obj1,obj2))
+		console.log(Object.compareObject(obj1,obj3))
+		console.log(JSON.stringify(obj1) === JSON.stringify(obj2))
+	</script>
+</body>
+</html>

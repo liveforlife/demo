@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script id="worker" type="app/worker">
+	addEventListener('message', function () {
+		postMessage('some message');
+	}, false);
+	</script>
+	<script>
+		/* 
+			1、不能通过本地文件访问，注意 同源限制
+			2、主线程与 Worker 之间的通信内容，可以是文本，也可以是对象，通信是拷贝关系，即是传值而不是传址
+			3、传送 二进制数据，允许主线程把二进制数据直接转移给子线程，但是一旦转移，主线程就无法再使用这些二进制数据了
+			// Transferable Objects 格式
+				worker.postMessage(arrayBuffer, [arrayBuffer]);
+
+				// 例子
+				var ab = new ArrayBuffer(1);
+				worker.postMessage(ab, [ab]);
+			4、通常情况下，Worker 载入的是一个单独的 JavaScript 脚本文件，但是也可以载入与主线程在同一个网页的代码。
+				子线程 注意必须指定<script>标签的type属性是一个浏览器不认识的值
+				
+				主线程
+				var blob = new Blob([document.querySelector('#worker').textContent]);
+				var url = window.URL.createObjectURL(blob);
+				var worker = new Worker(url);
+		 */
+		if(window.Worker){
+			console.log(`支持子线程`)
+			let mywork=new Worker('worker.js')
+			mywork.onmessage=function(event){
+				console.log(`子线程传递的数据${JSON.stringify(event.data)}`)
+			}
+			mywork.postMessage(10)
+			mywork.onerror=function(event){
+				
+			}
+			mywork.addEventListener('error',function(event){
+				
+			})
+			//mywork.terminate();
+		}else{
+			console.log(`不支持子线程`)
+		}
+		//Blob操作二进制数据
+		let workerString='console.log("blob")'
+		let blob=new Blob([workerString],{type:'text/javascript'})
+		let Url=URL.createObjectURL(blob)
+		var worker=new Worker(Url)
+		
+		createDownLoader('download.txt','download file')
+		function createDownLoader(file,context){
+			let blob=new Blob([context]);
+			let link=document.createElement('a');
+			let Url=URL.createObjectURL(blob);
+ 			link.textContent=file;
+			link.download=file;
+ 			link.href=Url
+			document.body.appendChild(link)
+			
+		}
+	</script>
+</body>
+</html>
