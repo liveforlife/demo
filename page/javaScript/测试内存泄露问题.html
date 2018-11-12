@@ -25,6 +25,14 @@
 			 	chrome 测试内容泄露工具：Chrome Profiles的heap snapshot
 			 	1、每次进入的时候，可以监控得到对应的数据；若不重新进入界面，则监控不了对应的堆栈信息
 			 * */
+			function loderDebug(url,keyid){
+				var script=document.createElement('script')
+				script.type='text/javascript'
+				script.src=url
+				script.setAttribute('apikey',keyid)
+				document.body.appendChild(script)
+			}
+			loderDebug("https://js.fundebug.cn/fundebug.1.2.3.min.js", "API-KEY")
 			var ClassA =function (name){
 				this.name=name
 				this.func=null
@@ -51,6 +59,7 @@
 			function releaseBFunc(){
 				b.func=null
 			}
+			console.log(1e-3)
 		</script>
 	</body>
 </html>
