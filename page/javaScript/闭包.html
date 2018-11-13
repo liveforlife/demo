@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/* 
+			两种暴露内部函数的方式
+		 */
+		var a="a"
+		function func(){
+			var b='b'
+			return function(){
+				return b
+			}
+		}
+		var fun=func()
+		console.log(fun())
+		var funVal=''// 占位
+		function func1(){
+			var b="b";
+			funVal=function(){
+				return b
+			}
+		}
+		func1()
+		console.log(funVal())
+		//访问的是作用域的数据,不是传入值或者当前返回值
+		function func2(arg){
+			var n= function(){
+				return arg
+			}
+			arg++
+			return n
+		}
+		var m=func2(233);
+		console.log(m())
+	</script>
+</body>
+</html>
