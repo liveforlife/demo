@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var a 
+			console.log(typeof a ) // undefined
+			var s='1s'
+			console.log(s++) //'1s'   NaN
+			console.log(!!'false') //true
+			console.log(!!undefined) //false
+			console.log(typeof -Infinity) // Number
+			console.log(10 % '0') // NaN
+			console.log(undefined == null ) // false   true
+			console.log(false === "") // false
+			console.log(typeof "2E+2") // String
+			var l=2e+3
+			console.log(l++) // 2000
+			var v=100
+			v=v || 10
+			console.log(v) // 100
+			var v1=0
+			v1=v1 || 10
+			console.log(v1) // 10 注:0转化成Boolean 类型是false
+			var v2=null
+			v2=v2 || 10
+			console.log(v2) // 10
+			delete v
+			v=v || 10
+			console.log(v) // 100
+			for(let i=0;i<10;i++){
+				for(let j=0;j<10;j++){
+					console.log(`${i} * ${j} = ${i*j}`)
+				}
+			}
+		</script>
+	</body>
+</html>
