@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var a 
+			console.log(typeof a ) // undefined
+			var s='1s'
+			console.log(s++) //'1s'   NaN
+			console.log(!!'false') //true
+			console.log(!!undefined) //false
+			console.log(typeof -Infinity) // Number
+			console.log(10 % '0') // NaN
+			console.log(undefined == null ) // false   true
+			console.log(false === "") // false
+			console.log(typeof "2E+2") // String
+			var l=2e+3;
+			console.log(l++) // 2000
+			let v=100;
+			v=v || 10;
+			console.log(v); // 100
+			var v1=0;
+			v1=v1 || 10;
+			console.log(v1); // 10 注:0转化成Boolean 类型是false
+			var v2=null;
+			v2=v2 || 10;
+			console.log(v2); // 10
+			delete v;
+			v=v || 10;
+			console.log(v) ;// 100
+			for(let i=0;i<10;i++){
+				for(let j=0;j<10;j++){
+					console.log(`${i} * ${j} = ${i*j}`)
+				}
+			}
+			console.log(++[[]][+[]]+[+[]]) // 10
+			/* 
+			++[[]][+[]]+[+[]]				+[] == 0
+			 ++[[]][0]+[0]					[[]][0] 获取[[]]第0个元素	
+			 ++[]+[0]						[]=='' +('1') === 1  ++[] => +([]+1) => +('1') =>1   [0] == '0'
+			 1+'0'=10
+			 */
+			console.log(parseInt('377'))
+			console.log(parseInt('0377',8))
+			console.log(parseInt('0xFFF'))
+			console.log(parseInt('FF',16))
+			console.log(parseInt('90'))
+			console.log(parseInt('2e+3'))
+			var bin=0
+			if(bin==0){
+				var bin1=10
+			}
+			function aa(){
+				var bin2=100
+				console.log(bin1,bin2)
+			}
+			aa()
+			console.log(bin1);
+			var sum=function(a,b){
+				return a+b
+			}
+			var add=sum;
+			console.log(typeof sum);
+			delete sum;
+			console.log(typeof sum);
+			console.log(add(4,4));
+			
+			var name = 'lily';
+			delete name;
+			console.log(typeof name); //lily
+			
+			var obj={
+				name:'aaa',
+				age:10
+			}
+			delete(obj.age)
+			console.log(typeof obj.age)
+			//匿名回调函数
+			function muilit(arr,callback){
+				var arr1=[]
+				for(let i=0;i<arr.length;i++){
+					arr1[i]=callback(arr[i]*2)
+				}
+				return arr1
+			}
+			console.log(muilit([2,4,6],function(a){return a+2}))
+			//重写函数
+			function a(){
+				alert('a')
+				return function b(){
+					alert('b')
+				}
+			}
+			//a()()
+			//var a =a()
+// 			a()
+// 			a()
+			var a4=function ali(){
+				function awose(){
+					var setUp='done'
+				}
+				function awape(){
+					alert('awake up')
+				}
+				awose()
+				return awape
+			}()
+			// a4()
+// 			function f1(){
+// 				var a10=2;
+// 				f2()
+// 			}
+// 			function f2(){
+// 				console.log(a10)  //访问不了 a10
+// 			}
+// 			f1()
+		</script>
+	</body>
+</html>
