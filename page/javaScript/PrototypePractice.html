@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function Hero(name,age){
+				this.name=name
+				this.age=age
+				this.sayName=function (){
+					console.log(`this name is ${this.name}`)
+				}
+			};
+			Hero.prototype={
+				weight:100,
+				height:30,
+				sayWeight:function(){
+					console.log(`this is weight ${this.weight}`)
+				}
+			};
+			var hero=new Hero('Herry',15);
+			console.log(hero.constructor);
+			console.log(hero.weight);
+			console.log(hero.constructor) 
+			console.log(hero.constructor.prototype)
+			console.log(hero.__proto__)
+			for( a in hero){
+				console.log(`111${a} is ${hero[a]}`)
+				if(hero.hasOwnProperty(a)){
+					console.log(`222${a} is ${hero[a]}`)
+				}
+				if(hero.propertyIsEnumerable(a)){
+					console.log(`333${a} is ${hero[a]}`)
+				}
+			}
+		</script>
+	</body>
+</html>
