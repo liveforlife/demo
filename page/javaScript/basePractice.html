@@ -9,12 +9,12 @@
 			var a 
 			console.log(typeof a ) // undefined
 			var s='1s'
-			console.log(s++) //'1s'   NaN
+			console.log(s++) // NaN  += 先赋值在自增 赋值之前会强转成Number 
 			console.log(!!'false') //true
 			console.log(!!undefined) //false
 			console.log(typeof -Infinity) // Number
 			console.log(10 % '0') // NaN
-			console.log(undefined == null ) // false   true
+			console.log(undefined == null ) // true
 			console.log(false === "") // false
 			console.log(typeof "2E+2") // String
 			var l=2e+3;

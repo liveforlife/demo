@@ -14,6 +14,97 @@
 			}
 			delete obj.getName
 			console.log(typeof obj.getName)
+			
+			function Hero(name){
+				this.name=name
+			}
+			var hero=new Hero('aliy')
+			var wally=new hero.constructor('wally')
+			console.log(hero.constructor)
+			console.log(wally.constructor)
+			console.log(wally.name)
+			console.log(typeof hero) //object
+			var o={}
+			console.log(o.constructor)
+			console.log(typeof o.constructor)
+			
+			function returnHero(){
+				this.a=1
+				return 3//{b:'b'}
+			}		
+			var returnhero=new returnHero()
+			console.log(returnhero.a);
+			console.log(returnhero.b);
+			
+			var oLi={name:'aaa'};
+			function addLit(o){
+				o.name='1111'
+			}
+			addLit({...oLi})
+			console.log(oLi.name)
+			
+			var objwel={name:'objwel'};
+			var funPol=function(){}
+			funPol.prototype=objwel
+			var onk=new funPol()
+			console.log(onk.name)
+			
+// 			throw new Error('it is error')
+// 			throw {
+// 				name:'MyError',
+// 				message:'OMG!it is error'
+// 			}
+			function fP(){
+				function C(){
+					console.log(this) // window
+					return this
+				}
+				return C()
+			}
+			var o=fP()
+			function fp2(){
+				this.c=1
+				return false
+			}
+			console.log(typeof new fp2()) //Object
+			var arrP1=[1,2,[1,2]];
+			arrP1.sort(); //会直接修改原数组
+			var aa=arrP1.join('--'); //join不会修改原数组,会返回一个新的字符串
+			console.log(arrP1) ;// [1,[1,2],2]
+			console.log(aa)
+			function MyString(val){
+				var val=String(val) || ''
+				this.val=val
+				console.log(this.val)
+				this.length=val.length
+				this.toString=val.toString()
+				this.valueOf=Object.valueOf().bind(this)
+				this.charAt=function(a){
+					console.log(a)
+					var a=Number(a) || 0
+					if(a=="NaN"){
+						return this.val[0]
+					}else{
+						return this.val[a]
+					}
+				}
+				this.concat=function(a){
+					var a=a||''
+					this.val+=a
+					return this.val
+				}
+				this.split=function(a){
+// 					var a=a||''
+// 					var arr=[]
+// 					for(var i=0;i<this.val.length;i+a.length){
+// 						if(this.val[i] == a){
+// 							arr[1]=
+// 						}
+// 					}
+				}
+			}
+			var s=new MyString('hello')
+			console.log(s.length,s.toString,s.valueOf(),s.charAt(1),s.charAt('2'),s.charAt('e'))
 		</script>
 	</body>
 </html>
