@@ -78,9 +78,8 @@
 				console.log(this.val)
 				this.length=val.length
 				this.toString=val.toString()
-				this.valueOf=Object.valueOf().bind(this)
+				this.valueOf=Object.prototype.valueOf.bind(this)
 				this.charAt=function(a){
-					console.log(a)
 					var a=Number(a) || 0
 					if(a=="NaN"){
 						return this.val[0]
@@ -104,6 +103,7 @@
 				}
 			}
 			var s=new MyString('hello')
+			console.log(s.valueOf())
 			console.log(s.length,s.toString,s.valueOf(),s.charAt(1),s.charAt('2'),s.charAt('e'))
 		</script>
 	</body>

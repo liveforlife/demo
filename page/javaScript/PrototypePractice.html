@@ -20,6 +20,7 @@
 					console.log(`this is weight ${this.weight}`)
 				}
 			};
+			Hero.prototype.constructor=Hero
 			var hero=new Hero('Herry',15);
 			console.log(hero.constructor);
 			console.log(hero.weight);
@@ -35,6 +36,20 @@
 					console.log(`333${a} is ${hero[a]}`)
 				}
 			}
+			function Dog(){this.tail=true}
+			var benji=new Dog()
+			var rusty=new Dog()
+			Dog.prototype.say=function(){return 'WOO'}
+			console.log(benji.say())
+			console.log(benji.constructor.prototype.constructor)
+			Dog.prototype={paws:4,hair:true};
+			Dog.prototype.constructor=Dog;
+			var rest=new Dog();
+			console.log(rest.constructor)
+			console.log(benji.constructor)
+			console.log(benji.say())
+			console.log(rest.paws)
+			
 		</script>
 	</body>
 </html>
