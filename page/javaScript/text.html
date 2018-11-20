@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class LinkButt{
+				constructor(){
+					this.state={flagFalse:false}
+				}
+				changLike(){
+					const like_text=this.div.querySelector('.like-text');
+					this.state.flagFalse=!this.state.flagFalse;
+					like_text.innerHTML=this.state.flagFalse ?'取消':'点赞'
+				}
+				render(){
+					this.div=document.createElement('div');
+					var str="<button class='like-button'><span class='like-text'>点赞</span><span>👍</span></button>";
+					this.div.innerHTML=str;
+					this.div.addEventListener('click',this.changLike.bind(this),false);
+					return this.div
+				}
+			}
+			var buttonLike=new LinkButt();
+			document.body.appendChild(buttonLike.render());
+			var buttonLikeTwo=new LinkButt();
+			document.body.appendChild(buttonLikeTwo.render());
+		</script>
+	</body>
+</html>

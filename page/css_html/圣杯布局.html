@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style type="text/css">
+			.container{
+				padding: 0 300px 0 300px;
+			}
+			.main ,.left, .right{ /* 同级关系用逗号 */
+				position:relative;
+				float:left;
+				min-height:130px
+			}
+
+			.left{
+				left:-300px;
+				background-color:red;
+				width:300px;
+				margin-left:-100%
+			}
+			.right{
+				right:-300px;
+				background-color:yellow;
+				width:300px;
+				margin-left:-300px
+			}
+			.main{
+				background-color:blue;
+				width:100%;
+			}
+			.doubleContainer{
+				
+				}
+			.dobleMain,.dobleLeft,.doubleRight{
+				margin-top:100px;
+				float:left;
+				min-height:200px
+			}
+			.dobleMain{
+				background-color:blue;
+				width:100%;
+			}
+			.content{
+				margin:0px 300px 0px 200px
+			}
+			.dobleLeft{
+				background-color:yellow;
+				width:200px;
+				margin-left:-100%;
+			}
+			.doubleRight{
+				background-color:red;
+				width:300px;
+				margin-left:-300px
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 圣杯布局 -->
+		<div class="container">
+			<div class="main">main</div>
+			<div class="left">left</div>
+			<div class="right">right</div>
+		</div>
+		<!-- 双飞翼布局 -->
+		<<div class="doubleContainer">
+			<div class="dobleMain"><div class="content">dobleMain</div></div>
+			<div class="dobleLeft">dobleLeft</div>
+			<div class="doubleRight">doubleRight</div>
+		</div>
+	</body>
+</html>
