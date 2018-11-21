@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<script src="node_modules/jquery/dist/jquery.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<div id="divId">
+		<div class="div0">
+			div0
+		</div>
+	</div>	
+		<script type="text/javascript">
+			var div=$('#divId')
+			var div1=$('<div class="div1">div1<span class="alop">alop</span></div>')
+/* 			div1.on('click',function(e){
+				console.log($(e.target)[0].innerHTML)
+				console.log($(this)[0].innerHTML)
+			}) */
+			$('.div1').on('click','.alop',function(e){
+				console.log($(e.target)[0].innerHTML)
+				console.log($(this)[0].innerHTML)
+			})
+			/* $('#divId').bind('click','.div0',function(e){
+				console.log($(e.target)[0].innerHTML)
+				console.log($(this)[0].innerText)
+			}) */
+			div1.appendTo('#divId')
+			
+		</script>
+	</body>
+</html>
