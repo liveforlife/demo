@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>littelTest</title>
+	</head>
+	<body>
+		<!-- <iframe name="iframe1" src="PrototypePractice.html"></iframe>
+		<iframe name="iframe2" src="functionPractice.html"></iframe>
+		<button onclick="ali()">刷新一</button>
+		<button onclick="refreshTop()">刷新父页面</button> -->
+		<div id="divId" class="classId" name="aaaa" info="info"></div>
+		<button onclick="goToBaidu()">goto百度 assign</button>
+		<button onclick="goTotengxun()">goto腾讯 replace</button>
+		<button onclick="openWindow()">打开新的窗口</button>
+		<button onclick="resizeWidth()">调整新页面的位置</button>
+		<button onclick="cancelWin()">关闭打开的新窗口</button>
+		<button onclick="appendContent()">添加内容</button>
+		<button onclick="changeDocumentTitle()">修改文档title</button>
+		<script>
+			var iframe=window.frames
+			var childWin=''
+			console.log(iframe[0],iframe[1])
+			console.log(window.screen.colorDepth,screen.availHeight,screen.height)
+			document.getElementsByName('aaaa')[0].className='alik'
+			console.log(document.getElementsByName('aaaa')[0].attributes['class'].nodeValue)
+			function ali(){
+				//iframe[0].window.location.reload()
+				//iframe['iframe1'].self.location.reload()
+				//iframe['iframe1'].window.location.reload()
+				iframe['iframe1'].location.reload()
+			}
+			function refreshTop(){
+				iframe[0].window.top.location.reload()
+				setTimeout(function(){
+					var p=document.createElement('p')
+					p.innerHTML='aaaa'
+					document.body.appendChild(p)					
+				},3000)
+			}
+			function goToBaidu(){
+				location.assign('http://www.baidu.com')
+			}
+			function goTotengxun(){
+				location.replace('http://www.qq.com')
+			}
+			function openWindow(){
+				childWin=window.open('http://127.0.0.1:8848/demo/page/css_html/button_%E6%BB%91%E5%9D%97.html','childIframe','width=300,height=300,resizable=true')
+				console.log(childWin) 
+			}
+			function resizeWidth(){
+				childWin.moveTo(400,500)
+				setTimeout(function(){
+					childWin.moveBy(100,100)
+					setTimeout(function(){
+						childWin.resizeTo(400,400)
+						setTimeout(function(){
+							childWin.resizeBy(-200,-200)
+						},2000)
+					},2000)
+				},2000)
+			}
+			function cancelWin(){
+				childWin.close()
+			}
+			function appendContent(){
+				var p=document.createElement('p')
+				p.style.marginTop='40px'
+				var nodeVa=document.createTextNode('aaa')
+				nodeVa.nodeValue='bbbbb'
+				p.appendChild(nodeVa)
+				//p.textContent='child win'
+				childWin.document.body.appendChild(p)
+			}
+			function changeDocumentTitle(){
+				document.title='change TITLE'
+				console.log(document.getElementsByTagName('title')[0].textContent == document.title)
+				setTimeout(function(){
+					document.getElementsByTagName('title')[0].innerHTML='tag title'
+				},2000)
+			}
+			function callback(e){
+				e=e||window.event
+				var target=(typeof e.target !== 'undefined')? e.target : e.srcElement
+				console.log(target.nodeName)
+			}
+			if(document.addEventListener){
+				document.addEventListener('click',callback,false)
+			}else if(document.attachEvent){
+				document.attachEvent('click',callback)
+			}else{
+				document.onclick=callback
+			}
+			function request(url,callback){
+				url=url||''
+				var xhr=new XMLHttpRequest()
+				xhr.onreadystatechange=(function(xhr){
+					return function(){
+						if(xhr.readyState <4){
+							return ;
+						}
+						if(xhr.status !==200){
+							alert('错误')
+							return
+						}else{
+							callback(xhr)
+						}
+						
+					}
+				})(xhr)
+				xhr.open('get',url,true)
+				xhr.send('')
+			}
+			request('http://127.0.0.1:8848/demo/page/javaScript/PrototypePractice.html',function(o){
+				//console.log(o.responseText)
+			})
+			var MyKey={}
+			function nameSpace(val){
+				var spat=val.split('.')
+				var current=MyKey
+				for(var i in spat){
+					if(!current[spat[i]]){
+						current[spat[i]]={}
+					}
+					current=current[spat[i]]
+				}
+			}
+			nameSpace('name');
+			nameSpace('dom.style')
+			nameSpace('dom.css')
+			console.log(JSON.stringify(MyKey));
+			var Loggar=(function(){
+				var instance_new
+				if(typeof instance_new === 'undefined'){
+					instance_new=this
+				}
+				return instance_new
+			})()
+			var aaa=Loggar;
+			var bbb=Loggar;
+			console.log( aaa === bbb,Loggar.instance_new)
+			
+			console.log(aaa === bbb,Loggar.instance_new)
+			var observer={
+				addSubscriber:function(callback){
+					this.subsribers[this.subsribers.length]=callback
+				},
+				removeSubscriber:function(callbak){
+					for(var i =0;i<this.subsribers.length;i++){
+						if(this.subsribers[i] === callbak){
+							delete this.subsribers[i]
+						}
+					}
+				},
+				publish:function(what){
+					for(var i =0;i<this.subsribers.length;i++){
+						if(typeof this.subsribers[i] === 'function'){
+							this.subsribers[i](what)
+						}
+					}
+				},
+				make:function(o){
+					for(var i in this){
+						o[i]=this[i]
+						o.subsribers=[]
+					}
+				}
+			}
+			var bloogar={
+				writeBlogPlog:function(){
+					var content="today is "+new Date()
+					this.publish(content)
+				}
+			}
+			var lg_al={
+				newInfo:function(){
+					var content="that new Info"
+					this.publish(content)
+				}
+			}
+			var jack={
+				read:function(what){
+					console.log('just read')
+				}
+			}
+			var jill={
+				gossip:function(what){
+					console.log('you dont knew')
+				}
+			}
+			observer.make(bloogar)
+			observer.make(lg_al)
+			bloogar.addSubscriber(jack.read)
+			bloogar.addSubscriber(jill.gossip)
+			bloogar.writeBlogPlog()
+		</script>
+	</body>
+</html>
