@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="btn">有人想加你好友</button>
+		<p id="text"></p>
+		<script>
+			/**
+			 *  新消息提示方式：
+			 * 	   1.HTML中设置定时器，修改document.title
+			 * 	   2.HTML5中Notification,可以再脱离浏览器进行通知、
+			 * 			PWA：Progressive Web Apps 核心技术之一
+			 */
+			// 修改title
+			let showNewMessage=true
+			let timer=setInterval(function(){
+				let title=document.title
+				if(showNewMessage){
+					if(/新/.test(title) == false){
+						document.title="[你有一条新消息]"
+					}else{
+						document.title="[]"
+					}
+				}else{
+					document.title='标题'
+				}
+			},500)
+			window.onfocus=function(){
+				console.log('222')
+				showNewMessage=false //浏览器聚焦的时候 不闪烁
+			}
+			window.onblur=function(){
+				showNewMessage=true
+				console.log('333') //浏览器失焦时,闪烁
+			}
+			/**
+			 * html5 notification 
+			 * 	静态属性：permission：denied granted  default 
+			 *  实例属性 badge body data  等
+			 *  事件处理程序 onclick  onclose  onerror onshow
+			 *  静态方法  requestPermission()
+			 *  实例方法 close()
+			 */
+			if(window.Notification){
+				let button=document.querySelector('#btn')
+				let text=document.querySelector('#text')
+				let popNotice=function(){
+					if(Notification.permission == 'granted'){  // 是否允许通知
+						var notification=new Notification('Hi,帅哥',{
+							body:'可以加你的好友吗',
+							icon:'http://localhost:8080/static/img/white_logo.b724b82.png'
+						})
+					}
+					notification.onclick=function(){
+						text.innerHTML='已经加你好友了'
+						notification.close()
+					}
+				}
+				button.onclick=function(){
+					if(Notification.permission == 'granted'){
+						popNotice()
+					}else if(Notification.permission != 'denied'){
+						/* Notification.requestPermission(function(permission){
+							popNotice()
+						}) */
+						Notification.requestPermission.then(function(permission){
+							popNotice()
+						})
+					}
+				}
+			}else{
+				alert('你的浏览器不支持Notification')
+			}
+
+		</script>
+		
+	</body>
+</html>
