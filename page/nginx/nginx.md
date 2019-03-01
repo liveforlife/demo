@@ -20,3 +20,5 @@
 	
 ##### 查看版本
 	nginx -v
+	
+###nginx的Linux版本

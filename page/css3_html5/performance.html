@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body onload="init">
+		<script>
+			/**
+			 * Performance High Resolution Time API 一部分
+			 * Performance Timeline API ,the Navigation Timing API ,
+			 * the User Timing API , the Resource Timing API 扩展增强
+			 * https://segmentfault.com/a/1190000014479800?utm_source=tag-newest
+			 * 
+			 */
+			function buffer_full(event){
+				console.log("Warning : Resource Timing Buffer is Full")
+				performance.setResourceTimingBufferSize(200)
+			}
+			function init(){
+				if(performance){
+					performance.onresourcetimingbufferfull=buffer_full;
+				}
+			}
+			if(window.performance){
+				performance.mark('for-start')
+				setTimeout(function(){
+					performance.mark('for-end')
+					performance.measure('for-measure','for-start','for-end')				
+					var measures=performance.getEntriesByName('for-measure')
+					console.log(measures)
+					var measure=measures[0]
+					console.log(`setTimeout will : ${measure.duration}`),
+					performance.clearMarks()
+					performance.clearMeasures()
+				},1000)
+				let total
+				/* for (let i=0;i<100;i++) {
+					total+=i
+				} */
+			}
+		</script>
+	</body>
+</html>

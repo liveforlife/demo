@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		var	ws=new WebSocket('ws://localhost:3000/ws/chat')
+			ws.onmessage=function(event){
+				var data=event.data;
+				console.log(data)
+			}
+			ws.onclose=function(evl){
+				console.log(evl)
+			}
+			ws.onerror=function(code,msg){
+				console.log(code,msg)
+			}
+		</script>
+	</body>
+</html>

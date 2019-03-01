@@ -43,7 +43,7 @@
 				age:19,
 				show(){
 					console.log(`姓名为${this.name}`)
-				}
+				},
 			}
 			let pro1=new Proxy(json1,{
 				set(target,proprety,val){
@@ -51,7 +51,6 @@
 					target[property]=val
 				},
 				get(target,property){
-					console.log(target,property)
 					if(property in target){
 						return target[property]
 					}else{
@@ -66,10 +65,8 @@
 					console.log(`删除属性${property}`)
 					return  delete target.property
 				},
-				apply(target, context, args){
-	                //console.log(target, context, args);
-	                //console.log(...arguments);
-	                return Reflect.apply(...arguments);
+				apply(target, ctx, args){
+					return Reflect.apply(...arguments)*2;
 	            }
 			})
 			console.log(pro1.name,pro1.age,pro1.skill)
@@ -78,13 +75,24 @@
 	            console.log(this);
 	            console.log(args);
 	        }
-	
+			pro1.show()
+			console.log('name' in pro1)
+			delete pro1.name 
 	        //show(1,2,3,4);
 	
 	        //show.call('abc', 1,2,3,4);
 	        //show.apply('abcd',[1,2,3,4]);
 	
 	        Reflect.apply(show, 'aaaa', [1,2,3,4]);
+			function sum(left,right){
+				return left+right
+			}
+			let pro2=new Proxy(sum,{
+				apply(target,ctx,args){
+					return Reflect.apply(...arguments)*2
+				}
+			})
+			console.log(pro2(3,2))
 		</script>
 	</head>
 	<body>

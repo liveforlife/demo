@@ -1,0 +1,1 @@
+npm view vue version  --查看npm 安装包的版本
