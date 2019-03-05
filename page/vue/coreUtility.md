@@ -58,9 +58,20 @@ defaultStrat 的策略是：只要子选项不是 undefined 就使用子选项�
 	> observeArray
  - 拦截 数组变异  getOwnPropertyNames 把数组实例与代理原型或与代理原型中定义的函数联系起来，从而拦截数组变异方法
 
+**** 渲染函数的观察者--进阶的数据响应系统
+ - dep
+ - watcher
+ - 渲染(render) -> 重新渲染(re-render) 的过程探索数据响应系统更深层次的内容
+ - Vue.compile 函数是 Vue 暴露给开发者的工具函数
+ - Vue 的 $mount 函数要做的核心事情就是编译模板(template)字符串为渲染函数，
+	并将渲染函数赋值给 vm.$options.render 选项，这个选项将会在真正挂载组件的 mountComponent 函数中
+ - vm._render 调用 vm.$options.render 函数并返回生成的虚拟节点(vnode)
+ - vm._update 是把 vm._render 函数生成的虚拟节点渲染成真正的 DOM
+
+
  **** 基础知识
  - NaN === NaN --> false
- - 
+
 响应系统：
 如何避免收集重复的依赖
 如何深度观测
@@ -75,3 +86,6 @@ defaultStrat 的策略是：只要子选项不是 undefined 就使用子选项�
 performance
 makeMap
  
+ 问题：
+ 数据虚拟DOM渲染时 根据什么数据 如何收集依赖，
+ 数据改变时，如何 触发重新渲染
