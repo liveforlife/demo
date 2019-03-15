@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+		const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/
+		const ncname = '[a-zA-Z_][\\w\\-\\.]*'
+		const qnameCapture = `((?:${ncname}\\:)?${ncname})`
+		const startTagOpen = new RegExp(`^<${qnameCapture}`)
+		const startTagClose = /^\s*(\/?)>/
+		const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`)
+		const doctype = /^<!DOCTYPE [^>]+>/i
+		const comment = /^<!\--/
+		const conditionalComment = /^<!\[/
+		let arr='<div disabled v-if="able"></div>'
+		console.log(arr.match(attribute))
+		console.log(arr.match(ncname))
+		console.log(arr.match(qnameCapture))
+		console.log(arr.match(startTagOpen))
+		console.log('class="some-class"'.match(attribute))  // 测试双引号
+console.log("class='some-class'".match(attribute))  // 测试单引号
+console.log('class=some-class'.match(attribute))  // 测试无引号
+console.log('disabled'.match(attribute))  // 测试无属性值
+	</script>
+	</body>
+</html>
