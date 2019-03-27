@@ -133,6 +133,14 @@ defaultStrat 的策略是：只要子选项不是 undefined 就使用子选项�
  -  key 属性
     > key 属性不能被应用到 <template> 标签。
 		> 使用了 key 属性的标签，其元素描述对象的 el.key 属性保存着 key 属性的值。
+ - ref属性的元素
+		> 该标签的元素描述对象会被添加 el.ref 属性，该属性为解析后生成的表达式字符串，与 el.key 类似。
+		> 该标签的元素描述对象会被添加 el.refInFor 属性，它是一个布尔值，用来标识当前元素的 ref 属性是否在 v-for 指令之内使用。
+ - 处理(作用域)插槽
+		> 对于 <slot> 标签，会为其元素描述对象添加 el.slotName 属性，属性值为该标签 name 属性的值，并且 name 属性可以是绑定的。
+		> 对于 <template> 标签，会优先获取并使用该标签 scope 属性的值，如果获取不到则会获取 slot-scope 属性的值，并将获取到的值赋值给元素描述对象的 el.slotScope 属性，注意 scope 属性和 slot-scope 属性不能是绑定的。
+    > 对于其他标签，会尝试获取 slot-scope 属性的值，并将获取到的值赋值给元素描述对象的 el.slotScope 属性。
+    > 对于非 <slot> 标签，会尝试获取该标签的 slot 属性，并将获取到的值赋值给元素描述对象的 el.slotTarget 属性。如果一个标签使用了 slot 属性但却没有给定相应的值，则该标签元素描述对象的 el.slotTarget 属性值为字符串 '"default"'。
  **** 基础知识
  - NaN === NaN --> false
 
