@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		
+		restricted();
+		console.time();
+		console.log(Date.now())
+		console.log(performance.now())
+		console.log('----------')
+		let factorilTCO=function(n,current=1){
+			'use strict';
+			(n === 1) ?current :factorilTCO(n-1,current*n)
+		}
+		let factorilFOR=(n)=>{
+			let result=0
+			for(let i =0;i<n;i++){
+				result*=n
+			}
+			return result
+		}
+		let factorilNormal=(n)=>{
+			n ===1 ? 1 : n*factorilNormal(n-1)
+		}
+		let startNormal=performance.now();
+		factorilNormal(5000)  //100 0.5000000819563866 ; 10000 : 2.6000000070780516 ; 5000  1.5999998431652784
+		console.log(performance.now()-startNormal)
+		let startTCO=performance.now();
+		factorilTCO(50000) //100 1.0000001639127731  ;  5000 :  1.2000000569969416
+		console.log(performance.now()-startTCO)
+		let startFOR=performance.now();
+		factorilFOR(10000)  //100  0.699999975040555;100000000  240.2000001166016  ; 10000  1.2000000569969416
+		console.log(performance.now()-startFOR)
+		</script>
+	</body>
+</html>

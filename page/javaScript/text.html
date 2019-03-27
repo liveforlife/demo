@@ -28,6 +28,22 @@
 			document.body.appendChild(buttonLike.render());
 			var buttonLikeTwo=new LinkButt();
 			document.body.appendChild(buttonLikeTwo.render());
+			var a1={
+				a:3
+			}
+			var a2={
+				b:4
+			}
+			function add(obj){
+				with(obj){
+					a=2
+				}
+			}
+			add(a1)
+			console.log(a1.a)
+			add(a2)
+			console.log(a2.a)
+			console.log(a)
 		</script>
 	</body>
 </html>
