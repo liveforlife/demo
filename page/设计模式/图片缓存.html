@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let myImage=(function(){
+				var imgNode=document.createElement('img');
+				document.body.appendChild(imgNode);
+				return {
+					setSrc:function(src){
+						imgNode.src=src;
+					}
+				}
+			})()
+			let proxyImage=(function(){
+				let img=new Image();
+				img.onload=function(){
+					myImage.setSrc(this.src);
+				}
+				return {
+					setSrc:function(src){
+						myImage.setSrc('http://127.0.0.1:8848/demo/page/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/u=1022109268,3759531978&fm=26&gp=0.jpg')
+						img.src=src;
+					}
+				}
+			})()
+			proxyImage.setSrc('http://pic37.nipic.com/20140113/8800276_184927469000_2.png')
+			// http://pic37.nipic.com/20140113/8800276_184927469000_2.png
+			// 方法二
+// 			let myImage=(function(){
+// 				let imageNode=document.createElement('image');
+// 				document.appendChild(imageNode);
+// 				let img=new Image();
+// 				img.onload=function(){
+// 					imageNode.src=img.src
+// 				}
+// 				return {
+// 					setSrc:function(src){
+// 						imageNode.src='http://127.0.0.1:8848/demo/page/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/u=1022109268,3759531978&fm=26&gp=0.jpg'
+// 						img.src=src;
+// 					}
+// 				}
+// 			})()
+// 			myImage.setSrc('http://pic37.nipic.com/20140113/8800276_184927469000_2.png')
+		</script>
+	</body>
+</html>

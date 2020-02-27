@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="file" value="上传文件" />
+		<script>
+			window.external.upload=function(state){
+				console.log(state)
+			}
+		</script>
+	</body>
+</html>

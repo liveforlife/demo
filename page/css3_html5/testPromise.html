@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function sleep(duration){
+				return new Promise(function(resolve,reject){
+					setTimeout(resolve,duration)
+				})
+			}
+			async function foo(){
+				console.log('a')
+				await sleep(1000).then(()=>console.log('b'))
+				console.log('c')
+			}
+			foo()
+		</script>
+	</body>
+</html>

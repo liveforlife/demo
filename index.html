@@ -6,40 +6,126 @@
 		<script src="js/jquery.js"></script>
 	</head>
 	<body>	
-		<div id='111'>111
-			<div id="222">222
-				<div id="333">33</div>
-			</div>
+		<div style="position: absolute;background: blue;" id="div"> 我是 div
 		</div>
 		<script>
-			var url='https://ylt.cdhywl.cn/wgw/register/index.html'
-			$.ajax({
-				type:"get",
-				url:"http://192.168.0.123:8020/html/wgw/product_introduction.html",
-/*				header:{
-					'Host':'www.super-ping.com',
-                    'Connection':'keep-alive',
-                    'Cache-Control':'max-age=10000',
-                    'Access-Control-Allow-Origin': '*',
-                    'Accept': 'text/html, /*; q=0.01',
-                    'Accept-Language':'en',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36',
-                    'DNT':'1',
-                    'Referer': 'https://ylt.cdhywl.cn/wgw/register/index.html',
-                    'Accept-Encoding': 'gzip, deflate, sdch',
-                    'Accept-Language': 'zh-CN,zh;q=0.8,ja;q=0.6'
-				},*/
-				contentType:'application/x-www-form-urlencoded',
-				data:{
-					'text':'33333',
-					'url':'//////'
+			let tween={
+				/**
+				 * @param : 动画已消耗时间-t 小球原始位置-b 小球目标位置-c 动画持续总时间-d
+				 * @return 动画元素处于的当前位置
+				 */
+				linear:function( t, b, c, d){
+					return c*t/d + b
 				},
-				async:true,
-				success:function(data){
-					console.log(data)
+				easeIn:function( t, b, c, d){
+					return c*(t /= d) * t + b
+				},
+				strongEaseIn:function( t, b, c, d){
+					return c * ( t /= d) * t * t * t * t + b;
 				}
-			});
+			}
+			let Animate=function(dom){
+				this.dom=dom;
+				this.startTime=0;
+				this.startPos=0;
+				this.endPos=0;
+				this.propertyName=null;
+				this.easing=null;
+				this.duration=null;
+			}
+			/**
+			 * @param propertyName-- 更改的css ,endPos -- 目标位置,duration -- 持续时间,easing -- 缓动算法
+			 */
+			Animate.prototype.start=function(propertyName,endPos,duration,easing){
+				this.startTime= +new Date;
+				this.startPos=this.dom.getBoundingClientRect()[propertyName];
+				this.propertyName=propertyName;
+				this.endPos=endPos;
+				this.duration=duration;
+				this.easing=tween[easing];
+				
+				let self = this;
+				let timeId = setInterval(function(){
+					if(self.step() === false){
+						clearInterval(timeId);
+					}
+				},19)
+			}
+			Animate.prototype.step=function(){
+				let t= + new Date;
+				if(t >= this.startTime + this.duration){
+					this.update(this.endPos);
+					return false
+				}
+				let pos= this.easing(t-this.startTime , this.startPos , this.endPos - this.startPos , this.duration);
+				this.update(pos);
+			}
+			Animate.prototype.update=function(pos){
+				this.dom.style[this.propertyName]=pos + 'px';
+			}
+			
+			let div=document.getElementById('div');
+			var animate=new Animate(div);
+			animate.start('left',500,1000,'strongEaseIn');
+			
+// 			
+// 			let timeChunk=function(ary,fn,count){
+// 				let t;
+// 				let start=function(){
+// 					for (let i=0;i<Math.min(count | 1,ary.length);i++) {
+// 						let obj=ary.shift();
+// 						fn(obj);
+// 					}
+// 				};
+// 				return function(){
+// 					t=setInterval(function(){
+// 						if(ary.length ===0){
+// 							return clearInterval(t);
+// 						}
+// 						start()
+// 					},200)
+// 				}
+// 			}
+// 			
+// 			
+// 			let ary=[];
+// 			for (let i=0;i<=1000;i++) {
+// 				ary.push(i)
+// 			}
+// 			let renderFriendList=timeChunk(ary,function(n){
+// 				let div=document.createElement('div');
+// 				div.innerHTML=n;
+// 				document.body.appendChild(div);
+// 			},8)
+// 			renderFriendList();
+// 			var url='https://ylt.cdhywl.cn/wgw/register/index.html'
+// 			$.ajax({
+// 				type:"get",
+// 				url:"http://192.168.0.123:8020/html/wgw/product_introduction.html",
+// /*				header:{
+// 					'Host':'www.super-ping.com',
+//                     'Connection':'keep-alive',
+//                     'Cache-Control':'max-age=10000',
+//                     'Access-Control-Allow-Origin': '*',
+//                     'Accept': 'text/html, /*; q=0.01',
+//                     'Accept-Language':'en',
+//                     'X-Requested-With': 'XMLHttpRequest',
+//                     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36',
+//                     'DNT':'1',
+//                     'Referer': 'https://ylt.cdhywl.cn/wgw/register/index.html',
+//                     'Accept-Encoding': 'gzip, deflate, sdch',
+//                     'Accept-Language': 'zh-CN,zh;q=0.8,ja;q=0.6'
+// 				},*/
+// 				contentType:'application/x-www-form-urlencoded',
+// 				data:{
+// 					'text':'33333',
+// 					'url':'//////'
+// 				},
+// 				async:true,
+// 				success:function(data){
+// 					console.log(data)
+// 				}
+// 			});
 			/*document.getElementById('111').addEventListener('click',function(e){
 				console.log(e.target)
 			})*/

@@ -1,0 +1,615 @@
+<!Doctype html>
+<html>
+<head>		
+		<title>中国旅游TV直播</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="Content-Type" content="text/html " charset="utf-8">  
+		<meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	
+	<style type="text/css">
+	html,body{padding: 0;margin: 0;width: 100%;height: 100%;background-color: #1A1A1A;}
+	div{box-sizing: border-box;}
+	input{outline: none;}
+		.title{
+			height: 75vw;
+			width: 100%;
+			position: relative;
+			
+		}
+		
+		.text{
+			height: 15vw;
+			width: 100%;
+		
+			background-color: #FFFFFF;
+			padding: 2vw 3vw;
+		}
+	.text_two{
+			height: 11vw;
+			
+			width: 100%;
+			border-bottom: 0.5px solid #686868;
+			background-color: #1A1A1A;
+			display: flex;
+		} 
+		
+		.conent{
+			height: 39%;
+			width: 100%;
+			
+		}
+		
+		.foot{
+			height: 8%;
+			width: 100%;
+			
+			
+		}
+		.text_one{
+			font-size: 4vw;
+			font-weight: bold;
+			height: 50%;
+			vertical-align: bottom;
+			width: 100%;
+			overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+			margin-left:2vw;
+		}
+		img{
+			vertical-align: middle;
+			width: 5vw;
+		}
+	
+		.text_one_one-span {
+		display: inline-block;
+		margin-left:2vw;
+		}
+		
+		.text-head {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			
+		}
+		
+		.text-head img {
+			width: 12vw;
+		    height: 12vw;
+		}
+		.box{
+			
+			width: 80%;
+		}
+		.text_one_one-span img{
+			width: 4vw;
+			vertical-align: middle;
+		}
+
+		.text_two-span, .active{
+			display: inline-block;
+					
+			margin-left: 3vw;
+		} 
+		.guan{
+			background-color: #F29901;
+		
+			width: 20%;
+			text-align: center;
+			color: white;
+			
+		}
+		.guan_one{
+			font-size:4vw;
+		}
+		.guan_two{
+			
+			margin-top: -0.5vw;
+				font-size:3vw;
+		}
+		.active{
+			color: #1AA9DA;
+			border-bottom: 2px solid #1AA9DA;
+			padding-bottom: 1vw;
+		}
+		.daohang{
+		width: 100%;padding-top: 0.5vw;color: white;	height: 10vw;font-size: 4vw;
+		}
+		.title {
+			width: 100%;
+			height: 55vw;
+		}
+	
+			
+			.foot{
+				display: flex;
+				background-color: #1A1A1A;
+				
+			}
+			.foot_one{
+				width: 70%;
+				
+				display: flex;
+				align-items: center;
+			}
+			.foot_two{
+				width: 30%;
+				display: flex;
+				align-items: center;
+				
+			}
+			.foot_one div{
+				display: inline-block;
+				
+				border-radius:50% ;
+				width: 10vw;
+				height: 10vw;
+				
+				line-height: 10vw;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #E6E6E6;
+				margin-left: 3vw;
+			}
+			.foot_two div{
+				display: inline-block;
+				
+				border-radius:50% ;
+				width: 10vw;
+				height: 10vw;
+				
+				line-height: 10vw;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #00B6EF;
+				margin-left: 3vw;
+			}
+			
+.video {
+    width: 100%;
+    height: 56vw;
+    margin: 0;
+    object-fit: fill;
+}	
+
+.leftimg {
+height:9vw;
+   background-color: #303030;
+}.leftimg img {
+    width: 6.7vw;
+    height: 6.7vw;
+    z-index:999;
+    width: 6.7vw;
+		height: 6.7vw;
+		position: relative;
+		top: 1vw;
+		left: 2vw;
+}
+
+
+
+	.list1 {
+    width: 100%;
+    display: flex;
+    margin-bottom: 6.4vw;
+}.list-box {
+    position: relative;
+}.list-box img {
+    width: 45.9vw;
+    height: 28.9vw;
+    border-radius: 1vw;
+}.listsp {
+    width: 10.2vw;
+    height: 4.3vw;
+    line-height: 4.3vw;
+    text-align: center;
+    border-radius: 3vw;
+    position: absolute;
+    top: 2.5vw;
+    left: 1.2vw;
+    background-color: #000;
+    color: #fff;
+    font-size: 2.8vw;
+}.listdiv {
+    width: 45.9vw;
+    height: 5.2vw;
+    font-size: 3.2vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}.listdiv a {
+    text-decoration: none;
+    color: #fff;
+}
+     .two_one{
+			width: 100%;
+				display: flex;
+				padding: 2vw 2vw;		
+				color:#00B6EF;
+				font-size:4vw;
+				display: flex;
+				justify-content: space-between;
+				
+		}
+		.two_one-span{
+		
+		color:#F0D346;
+		}
+.pl-huifu {
+	width: 100%;
+	height: 13.5vw;
+	background-color: #EEEEEE;
+	padding: 0 3.3vw;
+	display: flex;
+	align-items: center;
+	font-size: 3.6vw;
+	color: #5D5D5D;
+	position: fixed;
+	bottom: 0;
+	
+}
+
+.pl-huifu  input {
+	width: 80vw;
+	height: 7.9vw;
+	margin-right: 3vw;
+	border-radius: 3vw;
+	padding-left: 2vw;
+	border: none;
+}
+.show{
+	display: block;
+}
+.money{
+	height: 97vw;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	
+	background-color: white;
+}
+.money_title{
+	display: flex;
+	 justify-content: space-between;
+	padding: 3vw 3vw;
+	border-bottom: 1px solid #eee;
+}
+.blance{
+	width: 50%;
+}
+#balance{
+	color: red;
+	margin-left: 2vw;
+} 
+.daoju{
+	width: 50%;
+	text-align: right;
+}
+.liwu{
+
+	width: 17.5vw;
+	height: 26vw;
+	
+}
+.liwu img{
+	width: 16.5vw;
+	height: 16.7vw;
+
+}
+.liwu_one{
+	font-size: 3.5vw;
+	text-align: center;
+}
+.liwu_two{
+	font-size: 3vw;
+	height: 4vw;
+	line-height: 2vw;
+	text-align: center;
+	color: orange;
+	margin-top: 0.5vw;
+}
+
+.sum{
+	
+	height: 15vw;
+	line-height: 15vw;
+	color: #11B4B0;
+	background-color: #EEEEEE;
+	text-align: center;
+	
+}
+.sum input{
+	width: 15vw;
+	height: 6vw;
+	border-radius:3vw ;
+	border: none;
+	margin-left: 1vw;
+}
+.xiaofei{
+	display: inline-block;
+	line-height: 7vw;
+	width: 15vw;
+	height: 7vw;
+	background-color: #11B4B0;
+	border-radius:3vw ;
+
+	color: white;
+}
+.bored{
+	border:1px solid #11B4B0;
+}
+.chongzhi{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50vw;
+	
+}
+.chongzhi_yue{
+	background-color: #FFFFFF;
+	height: 10vw;
+	line-height: 10vw;
+	border-bottom: 1px solid #EEEEEE;
+}
+.chongzhi_foot{
+	background-color: #EEEEEE;
+	height: 20vw;
+	text-align: center;
+	line-height: 20vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.chongzhi_text{
+	display: inline-block;
+	margin-left: 2vw;
+	width: 60%;
+}
+.chong_money{
+	display: inline-block;
+	width: 30%;
+	text-align: right;
+}
+button{
+	width: 40vw;
+	height: 10vw;
+	
+	border: none;
+	border-radius:3vw ;
+	background-color: #FEDE00;
+	font-size: 5vw;
+	font-weight: bold;
+}
+.conent>div{
+				width: 100%;
+				height: 100%;
+				
+			}
+			.one{
+				background-color: #1A1A1A;
+				padding: 3vw 5vw;overflow-y:auto;
+			}
+			.two{
+				background-color: #FFFFFF;overflow-y:auto;
+				background-color: #1A1A1A;
+			}
+			.three{
+				background-color: #FFFFFF;
+			}
+			.four{
+				background-color: #1A1A1A;overflow-y:auto;
+				padding: 5vw 3vw;
+				display: flex;
+				flex-wrap: wrap;
+				color:#fff;
+			}
+			
+			.one div{
+				
+				overflow-y:auto;
+			}
+			.name{
+				color: #59AECF;
+			}
+			.wenben{
+				color: #83756B;
+				
+			}
+			.ke{
+				display: block;
+				color: #A67026;
+			}
+
+			.two_img img{
+				width: 14vw;
+				height: 14vw;
+			}
+			.two_img{
+		/* 		width: 20%; */
+				text-align: center;
+			}
+		/* 	.address{
+				width: 70%;
+			} */
+			.right{
+				width: 10%;
+				text-align: center;
+				margin-top:4vw;
+			}
+			.three_img img{
+				width: 14vw;
+				height: 14vw;
+			}
+			.three_img{
+				width: 20%;
+			
+				text-align: center;
+			}
+/* 			.three_text{
+				width: 100%;
+				font-weight: bold;
+			} */
+/* 			.three_text p{
+				line-height: 8vw;
+			}
+			.three_text a{
+				color: #000;
+				text-decoration: none;
+				margin-left: 2vw;
+			} */
+			.three_title{
+				display: inline-block;
+				
+				background-color: #00B6EF;
+				color: white;
+				border-radius:1vw ;
+				margin-left: 2vw;
+				font-size: 3vw;
+				width: 8vw;
+				text-align: center;
+			}
+			.three_conent{
+			    width:100%;	
+				font-weight: 400;
+				font-size: 3vw;
+				color: #949494;
+			}
+			.four_img  img{
+				width: 100%;
+				
+			}
+			.four_img {
+				width: 48%;
+				
+				margin-left: 1vw;
+				position: relative;
+				
+			}
+			.huikan{
+				display: inline-block;
+				
+				position: absolute;
+				top: 2vw;
+				left: 2vw;
+				border-radius:2vw ;
+				color: white;
+				font-size: 3vw;
+				width: 8vw;
+				text-align: center;
+				background-color: #181818;
+			}
+			.four_text{
+				font-size: 3vw;
+				color: white;
+				height: 8vw;
+				line-height: 8vw;
+				
+			}
+			.num{
+				display: inline-block;
+				position: absolute;
+				right: 4vw;
+				font-size: 3vw;
+				top: 20vw;
+				color: white;
+			}
+			.demo img{
+			width: 5vw;
+			height: 5vw;
+			position: absolute;
+			bottom: 9%;
+			left: 79%;
+			margin-left: -10px;
+			}
+		
+		
+		#content {
+		 width:100%;
+		  
+		}
+		
+		.three_text video {
+		  width: 100%;
+		 
+		}
+		
+		.three_text img {
+		 
+		 width: 100%;
+		  
+		}
+	video{
+			width: 100%;
+			height: 55vw;
+		}
+		.focusimg{
+		    width: 4vw;
+			height:4vw;
+		}
+		#hotnumber{
+		  margin-right: 2vw;
+		
+		}
+    </style>
+	<script src="reqwest.js"></script>
+	<script src="mobile-detect.js"></script>
+    <script>
+        function load(){
+            var url = window.location.href
+            var id = url.slice(url.lastIndexOf('=') + 1)
+            
+            reqwest({
+                url: 'http://www.my100000.com:8000/live/selLiveById.htm?id=' + id,
+                method: 'get',
+                success: function (res) {
+                    document.getElementById('video').setAttribute('poster', 'http://www.my100000.com:8000' + res.result.img)
+                    document.getElementById('video').setAttribute('src', res.result.m3u8)
+                }
+            })
+
+
+        }
+
+        function download(){
+
+			var device_type = navigator.userAgent;//获取userAgent信息  
+			var md = new MobileDetect(device_type);//实例化mobile-detect  
+			var os = md.os();//获取系统  
+			var model = "";  
+			if (os == "iOS") {//ios系统的处理  
+				window.location.href = "itms-apps://itunes.apple.com/app/id1131237311"
+			} else if (os == "AndroidOS") {//Android系统的处理  
+				window.location.href = "http://www.pgyer.com/qa2P"
+			} else { //unknown
+                window.location.href="http://www.my100000.com/download"
+            }
+
+        }
+    </script>
+
+<body onload="load()">
+<div class="video">	
+  
+    <video id="video" controls="controls" preload="auto" poster="http://www.my100000.com:8000/upload/20190519/1f678fdcd-5a68-491c-bdcf-ec1319ac7825.jpg" width="100%" height="auto" style="width: 100%; height: 100%; object-fit: fill" 
+    src="https://cttv-01-01-01.oss-cn-beijing.aliyuncs.com/Live%20Replay/2019/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9%E8%81%94%E8%B5%9B%E6%B2%B3%E5%8D%97-%E7%9D%A2%E5%8E%BF%E7%AB%99/2019%E5%B9%B4%E2%80%9C%E8%B6%B3%E5%8A%9B%E5%81%A5%E6%9D%AF%E2%80%9D%E4%B8%AD%E5%9B%BD%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9%E8%81%94%E8%B5%9B%E6%9A%A8%E5%85%A8%E5%9B%BD%E5%86%A0%E5%86%9B%E8%B5%9B%E6%B2%B3%E5%8D%97%E7%9D%A2%E5%8E%BF%E7%AB%994G.mp4">              
+      
+    </video>
+
+
+
+
+</div>
+<div style="margin-top:40px; text-align: center">
+    <button onclick="download()">
+        下载APP
+    </button>
+</div>
+
+
+</body>
+
+</html>
