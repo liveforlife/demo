@@ -16,6 +16,7 @@ console.log(com.count)
 http.createServer(function(req,res){
 	res.setHeader('Content-Type','text/plain')
 	res.end('Holle nodeJs')
-}).listen(port,hostname,function(){
+}).listen(port, hostname, function () {
+	debugger
 	console.log(`hostName : ${hostname} ;port : ${port}`)
 })
