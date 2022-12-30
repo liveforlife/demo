@@ -4,10 +4,10 @@
   "description": "test webpack",
   "main": "component/1.js",
   "dependencies": {
-    "css-loader": "^1.0.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.22.0",
-    "webpack-cli": "^3.1.2"
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.1.10"
